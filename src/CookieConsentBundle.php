@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace huppys\CookieConsentBundle;
 
-use huppys\CookieConsentBundle\Entity\CookieSettings;
+use huppys\CookieConsentBundle\Controller\CookieConsentController;
+use huppys\CookieConsentBundle\Cookie\CookieChecker;
+use huppys\CookieConsentBundle\Cookie\CookieHandler;
+use huppys\CookieConsentBundle\EventSubscriber\CookieConsentFormSubscriber;
+use huppys\CookieConsentBundle\Repository\CookieConsentRepository;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 class CookieConsentBundle extends AbstractBundle
 {
@@ -27,36 +32,24 @@ class CookieConsentBundle extends AbstractBundle
             ->exclude('../src/{DependencyInjection,Entity,Enum,Kernel/*.php}');
 
         $services->defaults()
-            ->autoconfigure()
             ->autowire()
+            ->autoconfigure()
             ->private();
 
-        // TODO: Challenge this
-//        $services->set(CookieConsentController::class)->public();
+        $services->defaults()
+            ->bind('$position', $config['position'])
+            ->bind('string $formAction', $config['form_action'])
+            ->bind('string $readMoreRoute', $config['read_more_route']);
 
-        if (isset($config['cookie_settings'])) {
-            $services->defaults()->bind(CookieSettings::class . '$cookieSettings', $config['cookie_settings']);
-        }
+        // the controller has to be public
+        $services->set(CookieConsentController::class)->public()->autowire(true);
 
-        if (isset($config['persist_consent'])) {
-            $services->defaults()->bind('bool $persistConsent', $config['persist_consent']);
-        }
+        // configure manually wired constructor arguments for private services
+        $services->set(CookieChecker::class)->args([service('request_stack')]);
+        $services->set(CookieHandler::class)->args([$config['cookie_settings']]);
+        $services->set(CookieConsentFormSubscriber::class)->args([$config['persist_consent']]);
+        $services->set(CookieConsentRepository::class)->args([service('doctrine')]);
 
-        if (isset($config['position'])) {
-            $services->defaults()->bind('string $cookieConsentPosition', $config['position']);
-        }
-
-        if (isset($config['form_action'])) {
-            $services->defaults()->bind('string $formAction', $config['form_action']);
-        }
-
-        if (isset($config['read_more_route'])) {
-            $services->defaults()->bind('string|null $readMoreRoute', $config['read_more_route']);
-        }
-
-        if (isset($config['csrf_protection'])) {
-            $services->defaults()->bind('bool $csrfProtection', $config['csrf_protection']);
-        }
 
         //        Register pre-compile classes here?
         //        $this->addAnnotatedClassesToCompile([

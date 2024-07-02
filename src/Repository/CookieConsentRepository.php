@@ -2,17 +2,21 @@
 
 declare(strict_types=1);
 
-namespace huppys\CookieConsentBundle\Service;
+namespace huppys\CookieConsentBundle\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use huppys\CookieConsentBundle\Entity\CookieConsentLog;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CookieConsentService
+class CookieConsentRepository
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(private ManagerRegistry $entityManagerRegistry)
     {
+        $this->entityManager = $this->entityManagerRegistry->getManagerForClass(CookieConsentLog::class);
     }
 
     public function rejectAllCookies(Request $request, Response $response)

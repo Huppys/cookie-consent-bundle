@@ -13,16 +13,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConsentDetailedType extends AbstractType
 {
-    private bool $csrfProtection;
-    private TranslatorInterface $translator;
 
     public function __construct(
-        TranslatorInterface $translator,
-        bool                $csrfProtection = true
+        private readonly TranslatorInterface $translator,
+        private readonly bool                $csrfProtection = true
     )
     {
-        $this->csrfProtection = $csrfProtection;
-        $this->translator = $translator;
     }
 
     /**
@@ -65,11 +61,11 @@ class ConsentDetailedType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ConsentDetailedConfiguration::class,
-            'translation_domain' => 'CookieConsentBundle',
-            'csrf_protection' => $this->csrfProtection,
-            'csrf_token_id' => 'csrf_cookie_consent',
-        ]);
+                                   'data_class' => ConsentDetailedConfiguration::class,
+                                   'translation_domain' => 'CookieConsentBundle',
+                                   'csrf_protection' => $this->csrfProtection,
+                                   'csrf_token_id' => 'csrf_cookie_consent',
+                               ]);
     }
 
     protected function translate(string $key): string

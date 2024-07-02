@@ -8,7 +8,7 @@ use huppys\CookieConsentBundle\Controller\CookieConsentController;
 use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
-use huppys\CookieConsentBundle\Service\CookieConsentService;
+use huppys\CookieConsentBundle\Repository\CookieConsentRepository;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -44,18 +44,18 @@ class CookieConsentControllerTest extends TestCase
         $this->cookieChecker = $this->createMock(CookieChecker::class);
         $this->translator = $this->createMock(Translator::class);
         $this->router = $this->createMock(RouterInterface::class);
-        $this->cookieConsentService = $this->createMock(CookieConsentService::class);
+        $this->cookieConsentService = $this->createMock(CookieConsentRepository::class);
 
         $this->cookieConsentController = new CookieConsentController(
             $this->templating,
             $this->formFactory,
             $this->cookieChecker,
             $this->router,
-            'top',
             $this->translator,
             null,
             null,
-            $this->cookieConsentService
+            $this->cookieConsentService,
+            'top'
         );
     }
 

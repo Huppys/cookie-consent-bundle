@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.4/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
          colors="true"
          bootstrap="tests/bootstrap.php"
+         failOnDeprecation="true"
+         failOnWarning="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
          cacheDirectory=".phpunit.cache">
     <php>
         <env name="KERNEL_CLASS" value="huppys\CookieConsentBundle\tests\Fixtures\App\AppKernel"/>

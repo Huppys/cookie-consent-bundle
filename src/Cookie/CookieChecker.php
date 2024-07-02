@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace huppys\CookieConsentBundle\Cookie;
 
 use huppys\CookieConsentBundle\Enum\CookieName;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CookieChecker
 {
-    private Request $request;
-
-    public function __construct(Request $request)
+    public function __construct(private readonly RequestStack $requestStack)
     {
-        $this->request = $request;
     }
 
     /**
@@ -21,7 +18,7 @@ class CookieChecker
      */
     public function isCookieConsentOptionSetByUser(): bool
     {
-        return $this->request->cookies->has(CookieName::COOKIE_CONSENT_NAME);
+        return $this->requestStack->getCurrentRequest()->cookies->has(CookieName::COOKIE_CONSENT_NAME);
     }
 
     /**
@@ -29,6 +26,6 @@ class CookieChecker
      */
     public function isCategoryAllowedByUser(string $category): bool
     {
-        return $this->request->cookies->get(CookieName::getCookieCategoryName($category)) === 'true';
+        return $this->requestStack->getCurrentRequest()->cookies->get(CookieName::getCookieCategoryName($category)) === 'true';
     }
 }

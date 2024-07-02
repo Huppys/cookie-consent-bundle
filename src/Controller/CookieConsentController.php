@@ -8,7 +8,7 @@ use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
-use huppys\CookieConsentBundle\Service\CookieConsentService;
+use huppys\CookieConsentBundle\Repository\CookieConsentRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\LocaleAwareInterface;
 use Twig\Environment;
@@ -28,15 +28,15 @@ use Twig\Error\SyntaxError;
 class CookieConsentController
 {
     public function __construct(
-        private readonly Environment          $twigEnvironment,
-        private readonly FormFactoryInterface $formFactory,
-        private readonly CookieChecker        $cookieChecker,
-        private readonly RouterInterface      $router,
-        private readonly string               $cookieConsentPosition,
-        private readonly LocaleAwareInterface $translator,
-        private readonly string|null          $formAction,
-        private readonly string|null          $readMoreRoute,
-        private readonly CookieConsentService $cookieConsentService
+        private readonly Environment             $twigEnvironment,
+        private readonly FormFactoryInterface    $formFactory,
+        private readonly CookieChecker           $cookieChecker,
+        private readonly RouterInterface         $router,
+        private readonly LocaleAwareInterface    $translator,
+        private readonly string|null             $formAction,
+        private readonly string|null             $readMoreRoute,
+        private readonly CookieConsentRepository $cookieConsentService,
+        private readonly string                  $position
     )
     {
     }
@@ -54,7 +54,7 @@ class CookieConsentController
                 $this->twigEnvironment->render('@CookieConsent/cookie_consent.html.twig', [
                     'simple_form' => $this->createSimpleConsentForm()->createView(),
                     'detailed_form' => $this->createDetailedConsentForm()->createView(),
-                    'position' => $this->cookieConsentPosition,
+                    'position' => $this->position,
                     'read_more_route' => $this->readMoreRoute,
                 ])
             );

@@ -2,9 +2,11 @@
 
 namespace huppys\CookieConsentBundle\tests\Fixtures\App;
 
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use huppys\CookieConsentBundle\CookieConsentBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
@@ -17,6 +19,8 @@ class AppKernel extends Kernel
     {
         return [
             new FrameworkBundle(),
+            new TwigBundle(),
+            new DoctrineBundle(),
             new CookieConsentBundle()
         ];
     }
@@ -26,12 +30,26 @@ class AppKernel extends Kernel
         $container->setParameter('kernel.project_dir', __DIR__);
 
         $container->setParameter('kernel.secret', 'thisIsASecret');
+
         $container->loadFromExtension('framework', [
             'test' => true,
         ]);
 
+        $container->loadFromExtension('doctrine', [
+            'dbal' => [
+                'driver' => 'pdo_sqlite'
+            ],
+            'orm' => [
+                // ASK: Why is 'auto_mapping' => true required to successfully run CookieConsentBundleServicesTest#shouldProvideController() ?
+                'auto_mapping' => true
+            ]
+        ]);
+
         $container->loadFromExtension('cookie_consent', [
-            'cookie_settings' => []
+            'cookie_settings' => [
+            ],
+            'consent_categories' => ['social_media', 'analytics', 'marketing'],
+            'position' => 'top',
         ]);
     }
 }

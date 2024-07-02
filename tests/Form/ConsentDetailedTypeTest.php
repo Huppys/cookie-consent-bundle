@@ -74,7 +74,7 @@ class ConsentDetailedTypeTest extends TypeTestCase
     public static function submittedFormProvider(): array
     {
         return [
-            'dataset:accept_all_clicked' => [
+            'dataset:save_consent_settings_clicked' => [
                 [
                     FormSubmitName::SAVE_CONSENT_SETTINGS => true,
                     'description' => 'test_detailed_type',
@@ -121,7 +121,14 @@ class ConsentDetailedTypeTest extends TypeTestCase
                     'consent_version' => 1,
                 ],
                 FormSubmitName::SAVE_CONSENT_SETTINGS,
-            ]
+            ],
+            'dataset:accept_all_clicked' => [
+                [
+                    FormSubmitName::ACCEPT_ALL => true,
+                    'description' => 'test_detailed_type',
+                ],
+                FormSubmitName::ACCEPT_ALL,
+            ],
         ];
     }
 }

@@ -5,9 +5,6 @@
   "license": "MIT",
   "require": {
     "php": "^8.1",
-    "doctrine/annotations": "^1.6|^2.0",
-    "doctrine/doctrine-bundle": "^1.10 || ^2.11.1",
-    "doctrine/orm": "^2.12.0",
     "symfony/asset": "^v6.3.0 || ^7.0",
     "symfony/config": "^v6.3.0 || ^7.0",
     "symfony/dependency-injection": "^v6.3.0 || ^7.0",
@@ -15,6 +12,7 @@
     "symfony/expression-language": "^6.3 || ^7.0",
     "symfony/form": "^6.3 || ^7.0",
     "symfony/http-kernel": "^6.3.0 || ^7.0",
+    "symfony/orm-pack": "^2.4",
     "symfony/security-csrf": "^6.3.0 || ^7.0",
     "symfony/translation": "^6.3.0 || ^7.0",
     "symfony/twig-bridge": "^6.3.0 || ^7.0",
