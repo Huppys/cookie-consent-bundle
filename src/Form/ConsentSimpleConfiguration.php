@@ -1,6 +1,6 @@
 <?php
 
-namespace huppys\CookieConsentBundle\Entity;
+namespace huppys\CookieConsentBundle\Form;
 
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 

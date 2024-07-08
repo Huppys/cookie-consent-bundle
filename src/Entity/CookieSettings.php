@@ -5,11 +5,11 @@ namespace huppys\CookieConsentBundle\Entity;
 class CookieSettings
 {
     private string $namePrefix;
-    private CookieSetting $consentCookie;
-    private CookieSetting $consentKeyCookie;
-    private CookieSetting $consentCategoriesCookie;
+    private BrowserCookie $consentCookie;
+    private BrowserCookie $consentKeyCookie;
+    private BrowserCookie $consentCategoriesCookie;
 
-    public function __construct(string $namePrefix, CookieSetting $consentCookie, CookieSetting $consentKeyCookie, CookieSetting $consentCategoriesCookie)
+    public function __construct(string $namePrefix, BrowserCookie $consentCookie, BrowserCookie $consentKeyCookie, BrowserCookie $consentCategoriesCookie)
     {
         $this->namePrefix = $namePrefix;
         $this->consentCookie = $consentCookie;
@@ -22,17 +22,17 @@ class CookieSettings
         return $this->namePrefix;
     }
 
-    public function getConsentCookie(): CookieSetting
+    public function getConsentCookie(): BrowserCookie
     {
         return $this->consentCookie;
     }
 
-    public function getConsentKeyCookie(): CookieSetting
+    public function getConsentKeyCookie(): BrowserCookie
     {
         return $this->consentKeyCookie;
     }
 
-    public function getConsentCategoriesCookie(): CookieSetting
+    public function getConsentCategoriesCookie(): BrowserCookie
     {
         return $this->consentCategoriesCookie;
     }

@@ -42,7 +42,7 @@
 
             {% block consent_form %}
                 {% block consent_form_start %}
-                    {{ form_start(form, {'attr': {'class': 'cookie-consent__form'}}) }}
+                    {{ form_start(simple_form, {'attr': {'class': 'cookie-consent__form'}}) }}
                 {% endblock consent_form_start %}
                 <div>
                     {% block required_cookies_category %}
@@ -56,7 +56,7 @@
                         </div>
                     {% endblock required_cookies_category %}
 
-                    {% for child in form %}
+                    {% for child in simple_form %}
                         {% if child.vars.block_prefixes[0] != 'button' %}
                             {{ form_row(child) }}
                         {% endif %}
@@ -64,10 +64,10 @@
                 </div>
 
                 {% block consent_form_rest %}
-                    {{ form_rest(form) }}
+                    {{ form_rest(simple_form) }}
                 {% endblock consent_form_rest %}
 
-                {{ form_end(form) }}
+                {{ form_end(simple_form) }}
             {% endblock consent_form %}
 
             {% block post_form %}

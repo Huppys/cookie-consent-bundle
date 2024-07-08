@@ -8,6 +8,8 @@ use huppys\CookieConsentBundle\Controller\CookieConsentController;
 use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Cookie\CookieHandler;
 use huppys\CookieConsentBundle\EventSubscriber\CookieConsentFormSubscriber;
+use huppys\CookieConsentBundle\Form\ConsentDetailedType;
+use huppys\CookieConsentBundle\Form\ConsentSimpleType;
 use huppys\CookieConsentBundle\Repository\CookieConsentRepository;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,13 +30,13 @@ class CookieConsentBundle extends AbstractBundle
     {
         $services = $container->services();
 
-        $services->load('huppys\\CookieConsentBundle\\', '../src/')
-            ->exclude('../src/{DependencyInjection,Entity,Enum,Kernel/*.php}');
-
         $services->defaults()
             ->autowire()
             ->autoconfigure()
             ->private();
+
+        $services->load('huppys\\CookieConsentBundle\\', '../src/')
+            ->exclude('../src/{DependencyInjection,Entity,Enum,Kernel/*.php}');
 
         $services->defaults()
             ->bind('$position', $config['position'])
@@ -49,6 +51,8 @@ class CookieConsentBundle extends AbstractBundle
         $services->set(CookieHandler::class)->args([$config['cookie_settings']]);
         $services->set(CookieConsentFormSubscriber::class)->args([$config['persist_consent']]);
         $services->set(CookieConsentRepository::class)->args([service('doctrine')]);
+        $services->set(ConsentSimpleType::class)->tag('form.type')->args([service('translator')]);
+        $services->set(ConsentDetailedType::class)->tag('form.type')->args([service('translator')]);
 
 
         //        Register pre-compile classes here?

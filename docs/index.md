@@ -1,7 +1,7 @@
 # Cookie Consent bundle for Symfony
 
 As soon as you are collecting or processing personally identifiable information (short `PII`) you are obliged to allow
-your visitors to decide what information are collected. This cookie consent banner bundle helps you to help your users. 
+your visitors to decide what information are collected. This cookie consent banner bundle helps you to help your users.
 
 Symfony bundle to integrate a cookie consent dialog to your website and to handle cookies according to AVG/GDPR.
 
@@ -54,7 +54,7 @@ config/routing.yml:
 
 ```yaml
 cookie_consent:
-  resource: "@CookieConsentBundle/config/routing.yaml"
+  resource: "@CookieConsentBundle/config/routes.php"
 ```
 
 ### Step 4: Configure to your needs
@@ -102,14 +102,14 @@ cookie_consent:
 Load the cookie consent in Twig via render_esi ( to prevent caching ) at any place you like:
 
 ```twig
-{{ render_esi(path('cookie_consent.show')) }}
+{{ render_esi(path('cookie_consent.view')) }}
 {{ render_esi(path('cookie_consent.show_if_cookie_consent_not_set')) }}
 ```
 
 If you want to load the cookie consent with a specific locale you can pass the locale as a parameter:
 
 ```twig
-{{ render_esi(path('cookie_consent.show', { 'locale' : 'en' })) }}
+{{ render_esi(path('cookie_consent.view', { 'locale' : 'en' })) }}
 {{ render_esi(path('cookie_consent.show_if_cookie_consent_not_set', { 'locale' : app.request.locale })) }}
 ```
 

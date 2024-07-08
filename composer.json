@@ -6,6 +6,7 @@
   "require": {
     "php": "^8.1",
     "symfony/asset": "^v6.3.0 || ^7.0",
+    "symfony/browser-kit": "^6.3.0 || ^7.0",
     "symfony/config": "^v6.3.0 || ^7.0",
     "symfony/dependency-injection": "^v6.3.0 || ^7.0",
     "symfony/doctrine-bridge": "^6.3.0 || ^7.0",
@@ -17,7 +18,8 @@
     "symfony/translation": "^6.3.0 || ^7.0",
     "symfony/twig-bridge": "^6.3.0 || ^7.0",
     "symfony/twig-bundle": "^6.3.0 || ^7.0",
-    "twig/twig": "^3.0"
+    "twig/twig": "^3.0",
+    "ext-http": "*"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^v3.38.2",
@@ -28,7 +30,10 @@
   },
   "prefer-stable": true,
   "autoload": {
-    "exclude-from-classmap": ["/tests/", "/node_modules/"],
+    "exclude-from-classmap": [
+      "/tests/",
+      "/node_modules/"
+    ],
     "psr-4": {
       "huppys\\CookieConsentBundle\\": "src/"
     }

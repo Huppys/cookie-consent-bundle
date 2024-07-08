@@ -33,6 +33,9 @@ class AppKernel extends Kernel
 
         $container->loadFromExtension('framework', [
             'test' => true,
+            'default_locale' => 'en',
+            'translator' =>
+                ['default_path' => '%kernel.project_dir%/translations']
         ]);
 
         $container->loadFromExtension('doctrine', [

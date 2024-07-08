@@ -2,13 +2,13 @@
 
 namespace huppys\CookieConsentBundle\tests\Form;
 
-use huppys\CookieConsentBundle\Entity\ConsentCategory;
-use huppys\CookieConsentBundle\Entity\ConsentCookie;
-use huppys\CookieConsentBundle\Entity\ConsentDetailedConfiguration;
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
+use huppys\CookieConsentBundle\Form\ConsentCategory;
 use huppys\CookieConsentBundle\Form\ConsentCategoryType;
 use huppys\CookieConsentBundle\Form\ConsentCookieType;
+use huppys\CookieConsentBundle\Form\ConsentDetailedConfiguration;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
+use huppys\CookieConsentBundle\Form\ConsentDetailsType;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\Exception;
@@ -33,7 +33,7 @@ class ConsentDetailedTypeTest extends TypeTestCase
             $consentCategory->setUserConsent($category['userConsent']);
 
             foreach ($category['cookies'] as $cookie) {
-                $consentCookie = new ConsentCookie();
+                $consentCookie = new ConsentDetailsType();
 
                 // explicitly set fields from formData
                 $consentCookie->setName($cookie['name']);

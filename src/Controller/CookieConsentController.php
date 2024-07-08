@@ -8,7 +8,7 @@ use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
-use huppys\CookieConsentBundle\Repository\CookieConsentRepository;
+use huppys\CookieConsentBundle\Service\CookieConsentService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\LocaleAwareInterface;
 use Twig\Environment;
@@ -28,15 +29,15 @@ use Twig\Error\SyntaxError;
 class CookieConsentController
 {
     public function __construct(
-        private readonly Environment             $twigEnvironment,
-        private readonly FormFactoryInterface    $formFactory,
-        private readonly CookieChecker           $cookieChecker,
-        private readonly RouterInterface         $router,
-        private readonly LocaleAwareInterface    $translator,
-        private readonly string|null             $formAction,
-        private readonly string|null             $readMoreRoute,
-        private readonly CookieConsentRepository $cookieConsentService,
-        private readonly string                  $position
+        private readonly Environment          $twigEnvironment,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly CookieChecker        $cookieChecker,
+        private readonly RouterInterface      $router,
+        private readonly LocaleAwareInterface $translator,
+        private readonly string|null          $formAction,
+        private readonly string|null          $readMoreRoute,
+        private readonly CookieConsentService $cookieConsentService,
+        private readonly string               $position
     )
     {
     }
@@ -44,8 +45,8 @@ class CookieConsentController
     /**
      * Show cookie consent.
      */
-    #[Route('/cookie-consent/show', name: 'cookie_consent.show')]
-    public function show(Request $request): Response
+    #[Route('/cookie-consent/view', name: 'cookie_consent.view')]
+    public function view(Request $request): Response
     {
         $this->setLocale($request);
 
@@ -70,8 +71,12 @@ class CookieConsentController
     }
 
     #[Route('/cookie-consent/update', name: 'cookie-consent.update')]
-    public function update(Request $request, Response $response, LoggerInterface $logger): JsonResponse
+    public function update(Request $request, Response $response, LoggerInterface $logger): Response
     {
+        if ($request->getMethod() != HTTP_METH_POST) {
+            throw new MethodNotAllowedException([HTTP_METH_POST]);
+        }
+
         $form = $this->createSimpleConsentForm();
         $form->handleRequest($request);
 
@@ -86,17 +91,19 @@ class CookieConsentController
 
                     return new JsonResponse('ok', Response::HTTP_OK);
                 }
-            }
-
-            if ($acceptAllButton = $form->get(FormSubmitName::ACCEPT_ALL)) {
+            } else if ($acceptAllButton = $form->get(FormSubmitName::ACCEPT_ALL)) {
                 $acceptAll = $acceptAllButton->isClicked();
 
                 if ($acceptAll) {
                     // tell consent manager service to set cookie values accordingly
-                    $this->handleFormSubmit($form->getData(), $request, $response, $rejectAllCookies);
+                    $this->cookieConsentService->acceptAllCookies($form->getData(), $request, $response);
 
                     return new JsonResponse('ok', Response::HTTP_OK);
                 }
+            } else {
+                $this->cookieConsentService->saveConsentSettings($form->getData(), $request, $response);
+
+                return new JsonResponse('ok', Response::HTTP_CREATED);
             }
 
         } else if ($form->isSubmitted() && $form->getClickedButton() == null) {
@@ -140,7 +147,7 @@ class CookieConsentController
     public function showIfCookieConsentNotSet(Request $request): Response
     {
         if ($this->cookieChecker->isCookieConsentOptionSetByUser() === false) {
-            return $this->show($request);
+            return $this->view($request);
         }
 
         return new Response();

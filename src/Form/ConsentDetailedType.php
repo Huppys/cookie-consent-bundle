@@ -2,7 +2,6 @@
 
 namespace huppys\CookieConsentBundle\Form;
 
-use huppys\CookieConsentBundle\Entity\ConsentDetailedConfiguration;
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

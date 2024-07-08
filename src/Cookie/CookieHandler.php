@@ -7,7 +7,7 @@ namespace huppys\CookieConsentBundle\Cookie;
 use DateInterval;
 use DateTime;
 use Exception;
-use huppys\CookieConsentBundle\Entity\CookieSetting;
+use huppys\CookieConsentBundle\Entity\BrowserCookie;
 use huppys\CookieConsentBundle\Entity\CookieSettings;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,9 +31,9 @@ class CookieHandler
         );
     }
 
-    private function castCookieConfigToCookieSetting(array $config): CookieSetting
+    private function castCookieConfigToCookieSetting(array $config): BrowserCookie
     {
-        return new CookieSetting(
+        return new BrowserCookie(
             $config['name'],
             $config['expires'],
             $config['domain'],

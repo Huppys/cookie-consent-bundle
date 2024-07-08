@@ -1,8 +1,8 @@
 <?php
 
-namespace huppys\CookieConsentBundle\Entity;
+namespace huppys\CookieConsentBundle\Form;
 
-class ConsentCookie
+class ConsentDetailsType
 {
     private string $name;
     private bool $consentGiven;

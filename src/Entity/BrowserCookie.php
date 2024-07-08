@@ -2,7 +2,7 @@
 
 namespace huppys\CookieConsentBundle\Entity;
 
-class CookieSetting
+class BrowserCookie
 {
     private string $name;
     private bool $httpOnly;

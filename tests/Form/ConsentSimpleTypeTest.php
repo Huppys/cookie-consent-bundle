@@ -2,8 +2,8 @@
 
 namespace huppys\CookieConsentBundle\tests\Form;
 
-use huppys\CookieConsentBundle\Entity\ConsentSimpleConfiguration;
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
+use huppys\CookieConsentBundle\Form\ConsentSimpleConfiguration;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;

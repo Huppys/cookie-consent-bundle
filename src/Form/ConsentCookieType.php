@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace huppys\CookieConsentBundle\Form;
 
-use huppys\CookieConsentBundle\Entity\ConsentCookie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -15,13 +14,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConsentCookieType extends AbstractType
 {
-    protected TranslatorInterface $translator;
 
     public function __construct(
-        TranslatorInterface $translator
+        private readonly TranslatorInterface $translator
     )
     {
-        $this->translator = $translator;
     }
 
     /**
@@ -43,9 +40,9 @@ class ConsentCookieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ConsentCookie::class,
-            'translation_domain' => 'CookieConsentBundle'
-        ]);
+                                   'data_class' => ConsentDetailsType::class,
+                                   'translation_domain' => 'CookieConsentBundle'
+                               ]);
     }
 
     protected function translate(string $key): string
