@@ -57,8 +57,9 @@
                     {% endblock required_cookies_category %}
 
                     {% for child in simple_form %}
-                        {% if child.vars.block_prefixes[0] != 'button' %}
-                            {{ form_row(child) }}
+                        {% if not child.rendered %}
+                            {{- form_widget(child) -}}
+                            {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
                         {% endif %}
                     {% endfor %}
                 </div>

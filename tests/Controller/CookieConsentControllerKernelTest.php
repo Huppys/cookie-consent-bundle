@@ -4,22 +4,41 @@ namespace huppys\CookieConsentBundle\tests\Controller;
 
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 class CookieConsentControllerKernelTest extends WebTestCase
 {
     #[Test]
     public function shouldRenderTemplateOnRequest(): void
     {
-        $client = static::createClient();
+        $this->givenSuccessfulRequest();
+    }
 
-        $client->request('GET', '/cookie-consent/view');
+    #[Test]
+    public function shouldSubmitRequestForUpdatingConsentSettingsAsPost(): void
+    {
+        $crawler = $this->givenSuccessfulRequest();
+
+        $form = $crawler->selectButton('consent_simple[accept_all]')->form();
+
+        $this->assertEquals('POST', $form->getMethod());
+
+        static::getClient()->submit($form, ['consent_simple[accept_all]' => true]);
 
         $this->assertResponseIsSuccessful();
     }
 
-    #[Test]
-    public function shouldBlockGetRequestForUpdatingConsentSettings(): void
+    /**
+     * @return void
+     */
+    public function givenSuccessfulRequest(): Crawler
     {
-        $this->markTestIncomplete();
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/cookie-consent/view');
+
+        $this->assertResponseIsSuccessful();
+
+        return $crawler;
     }
 }
