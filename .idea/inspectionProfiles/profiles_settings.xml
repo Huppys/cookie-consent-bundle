@@ -1,0 +1,12 @@
+<component name="InspectionProjectProfileManager">
+  <settings>
+    <info color="777bbe">
+      <option name="EFFECT_COLOR" value="777bbe" />
+      <option name="ERROR_STRIPE_COLOR" value="777bbe" />
+      <option name="EFFECT_TYPE" value="2" />
+      <option name="myName" value="Code Quality" />
+      <option name="myVal" value="350" />
+      <option name="myExternalName" value="CODE_QUALITY" />
+    </info>
+  </settings>
+</component>

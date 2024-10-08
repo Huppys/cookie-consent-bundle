@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e0f80805-9710-4e35-bb34-17c49320dfe4" name="Changes" comment="Add integration test for simple form type">
+      <change beforePath="$PROJECT_DIR$/templates/cookie_consent.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cookie_consent.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <interpreter name="php-dev:8.3.6" composer="composer" />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Doctrine Entity ServiceRepository" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Huppys&quot;
+  }
+}</component>
+  <component name="GitRewordedCommitMessages">
+    <option name="commitMessagesMapping">
+      <RewordedCommitMessageMapping>
+        <option name="originalMessage" value="Fix naming for cookie categories" />
+        <option name="rewordedMessage" value="Fix naming for cookie categories" />
+      </RewordedCommitMessageMapping>
+    </option>
+    <option name="currentCommit" value="1" />
+    <option name="onto" value="02d536334f1a8a9737b5ca6b1506dfe1d952acfe" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1702324623" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1700151223" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Huppys/cookie-consent-bundle&quot;,
+    &quot;accountId&quot;: &quot;3c2abbc1-aa99-4e48-bd3b-bcd9c8a80a10&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/vendor/symfony/config/Definition/Builder/ArrayNodeDefinition.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vendor/symfony/config/Definition/Builder/NodeBuilder.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vendor/symfony/config/Definition/Builder/ScalarNodeDefinition.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vendor/symfony/dependency-injection/Extension/Extension.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/vendor/symfony/translation/Translator.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+  </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="LaravelPintProjectConfiguration">
+    <option name="selectedConfigurationId" value="2602a412-e677-4d0b-8f8d-d98be8b55553" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="zfo58hsg" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MessDetectorProjectConfiguration">
+    <option name="selectedConfigurationId" value="2602a412-e677-4d0b-8f8d-d98be8b55553" />
+  </component>
+  <component name="PHPCSFixerProjectConfiguration">
+    <option name="selectedConfigurationId" value="DEFAULT_INTERPRETER" />
+  </component>
+  <component name="PHPCodeSnifferProjectConfiguration">
+    <option name="selectedConfigurationId" value="2602a412-e677-4d0b-8f8d-d98be8b55553" />
+  </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="c535e95c-775a-4b40-9ff5-d8bf7d9b0b0a" name="localhost" port="443" use_path_mappings="true" />
+    </servers>
+  </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="$PROJECT_DIR$" selected_validation_type="LOCAL" web_path_to_validation_script="http://127.0.0.1/" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php-dev:8.3.6">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/runtime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/clue/ndjson-react" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/react/child-process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/type-info" />
+      <path value="$PROJECT_DIR$/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/password-hasher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/vendor/symfony/test-pack" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/symfony/orm-pack" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+    </include_path>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2YGI2OigsPewtqIKDMc366yU2rC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Constants": "false",
+    "Docker.helper.executor": "Run",
+    "Docker.lint:twig.executor": "Run",
+    "PHP Script.Unnamed.executor": "Run",
+    "PHPUnit.ConsentCookieTypeTest.shouldSubmitValidSimpleConsentForm.executor": "Run",
+    "PHPUnit.ConsentCookieTypeTest.shouldSubmitValidSimpleConsentFormOnRejectAll.executor": "Run",
+    "PHPUnit.ConsentDetailedTypeTest (1).executor": "Run",
+    "PHPUnit.ConsentDetailedTypeTest.executor": "Run",
+    "PHPUnit.ConsentDetailedTypeTest.shouldHaveClickedButton.executor": "Debug",
+    "PHPUnit.ConsentSettingsControllerTest (1).executor": "Run",
+    "PHPUnit.ConsentSettingsControllerTest.executor": "Run",
+    "PHPUnit.ConsentSettingsControllerTest.shouldAcceptPostRequestWithConsentSettings.executor": "Run",
+    "PHPUnit.ConsentSettingsControllerTest.shouldHaveConsentSettingsController.executor": "Run",
+    "PHPUnit.ConsentSimpleTypeTest.executor": "Run",
+    "PHPUnit.ConsentSimpleTypeTest.shouldHaveSimpleTypeFormFields.executor": "Run",
+    "PHPUnit.CookieCheckerTest.executor": "Run",
+    "PHPUnit.CookieCheckerTest.shouldGetCookieConsentOptionSetByUser.executor": "Run",
+    "PHPUnit.CookieConsentBundleServicesTest (1).executor": "Run",
+    "PHPUnit.CookieConsentBundleServicesTest.executor": "Debug",
+    "PHPUnit.CookieConsentBundleTest.executor": "Run",
+    "PHPUnit.CookieConsentBundleTest.shouldBootBundle.executor": "Debug",
+    "PHPUnit.CookieConsentBundleTest.shouldConfigureBundle.executor": "Debug",
+    "PHPUnit.CookieConsentBundleTest.shouldExtendAbstractBundle.executor": "Debug",
+    "PHPUnit.CookieConsentBundleTest.shouldLoadExtension.executor": "Debug",
+    "PHPUnit.CookieConsentConfigDefinitonTest.executor": "Debug",
+    "PHPUnit.CookieConsentConfigDefinitonTest.testCookieNamesContainPrefix.executor": "Debug",
+    "PHPUnit.CookieConsentConfigDefinitonTest.testFullConfiguration.executor": "Run",
+    "PHPUnit.CookieConsentConfigDefinitonTest.testInvalidConfiguration.executor": "Run",
+    "PHPUnit.CookieConsentControllerKernelTest.executor": "Run",
+    "PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequest.executor": "Debug",
+    "PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequestForUpdatingConsentSettings.executor": "Debug",
+    "PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForDetailedConsentSettingsAsPost.executor": "Run",
+    "PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForUpdatingConsentSettingsAsPost.executor": "Run",
+    "PHPUnit.CookieConsentControllerTest.executor": "Run",
+    "PHPUnit.CookieConsentControllerTest.shouldReturnResponseAfterRender.executor": "Run",
+    "PHPUnit.CookieConsentControllerTest.shouldShowConsentFormIfCookieNotSet.executor": "Run",
+    "PHPUnit.CookieConsentControllerTest.testShow.executor": "Run",
+    "PHPUnit.CookieConsentControllerTest.testShowIfCookieConsentNotSet.executor": "Run",
+    "PHPUnit.CookieConsentControllerTest.testShowIfCookieConsentNotSetWithCookieConsentSet.executor": "Run",
+    "PHPUnit.CookieConsentControllerTest.testShowIfCookieConsentNotSetWithLocale.executor": "Run",
+    "PHPUnit.CookieConsentExtensionTest.executor": "Run",
+    "PHPUnit.CookieConsentExtensionTest.testFullConfiguration.executor": "Run",
+    "PHPUnit.CookieConsentExtensionTest.testInvalidConfiguration.executor": "Debug",
+    "PHPUnit.CookieConsentFormSubscriberTest.executor": "Run",
+    "PHPUnit.CookieConsentFormSubscriberTest.shouldGetSubscribedEvents.executor": "Run",
+    "PHPUnit.CookieConsentFormSubscriberTest.shouldHandleOnResponseEvent.executor": "Run",
+    "PHPUnit.CookieConsentFormSubscriberTest.testOnResponse.executor": "Run",
+    "PHPUnit.CookieConsentTypeTest.executor": "Run",
+    "PHPUnit.CookieHandlerTest.executor": "Run",
+    "PHPUnit.CookieHandlerTest.shouldSaveCookies.executor": "Run",
+    "PHPUnit.CookieLoggerTest.executor": "Run",
+    "PHPUnit.Main.executor": "Run",
+    "PHPUnit.Tests.executor": "Run",
+    "PHPUnit.shouldGetCookieConsentOptionSetByUser.executor": "Debug",
+    "PHPUnit.shouldHaveClickedButton.executor": "Run",
+    "RunOnceActivity.Enable generate summary features in internal mode": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "aspect.path.notification.shown": "true",
+    "com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary": "PHPUnit",
+    "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm": "Docker",
+    "dumpAutoload /Users/oliver.witzki/dev/projects/cookie-consent-bundle/composer.json": "--no-interaction --ansi --verbose --optimize",
+    "git-widget-placeholder": "main",
+    "javascript.nodejs.core.library.configured.version": "20.9.0",
+    "javascript.nodejs.core.library.typings.version": "20.9.5",
+    "jdk.selected.JAVA_MODULE": "Android API 33, extension level 3 Platform",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/oliver.witzki/dev/projects/cookie-consent-bundle/bin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build-server.executor": "Run",
+    "npm.build:dev.executor": "Run",
+    "npm.build:prod.executor": "Run",
+    "npm.watch.executor": "Run",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "org.rust.first.attach.projects": "true",
+    "php.override.implement.member.chooser.php.doc": "NONE",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.php.quality.tools.php.cs.fixer",
+    "ts.external.directory.path": "/Users/oliver.witzki/Applications/IntelliJ IDEA Ultimate.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bin" />
+      <recent name="$PROJECT_DIR$/Resources/assets/scss" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Resources/assets/js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/config/definitions" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/Resources" />
+      <recent name="$PROJECT_DIR$/docs" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.Main">
+    <configuration name="Pre-Commit tests" type="CompoundRunConfigurationType">
+      <toRun name="lint:twig" type="docker-deploy" />
+      <toRun name="Main" type="PHPUnitRunConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CookieConsentControllerKernelTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CookieConsentControllerKernelTest.shouldBlockGetRequest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" method="shouldBlockGetRequest" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CookieConsentControllerKernelTest.shouldBlockGetRequestForUpdatingConsentSettings" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" method="shouldBlockGetRequestForUpdatingConsentSettings" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CookieConsentControllerKernelTest.shouldSubmitRequestForDetailedConsentSettingsAsPost" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" method="shouldSubmitRequestForDetailedConsentSettingsAsPost" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CookieConsentControllerKernelTest.shouldSubmitRequestForUpdatingConsentSettingsAsPost" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" method="shouldSubmitRequestForUpdatingConsentSettingsAsPost" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lint:twig" type="docker-deploy" factoryName="docker-image" server-name="Docker">
+      <deployment type="docker-image">
+        <settings>
+          <option name="imageTag" value="php-dev:8.3.6" />
+          <option name="command" value="php /opt/project/bin/console lint:twig /opt/project/templates/" />
+          <option name="containerName" value="cookie-consent-bundle-dev-helper" />
+          <option name="commandLineOptions" value="-d -i -t" />
+          <option name="volumeBindings">
+            <list>
+              <DockerVolumeBindingImpl>
+                <option name="containerPath" value="/opt/project" />
+                <option name="hostPath" value="$PROJECT_DIR$" />
+              </DockerVolumeBindingImpl>
+            </list>
+          </option>
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="watch" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Attach to Node.js/Chrome.Attach to node process" />
+      <item itemvalue="Compound.Pre-Commit tests" />
+      <item itemvalue="Docker.helper" />
+      <item itemvalue="Docker.lint:twig" />
+      <item itemvalue="npm.watch" />
+      <item itemvalue="npm.build:dev" />
+      <item itemvalue="npm.build:prod" />
+      <item itemvalue="PHPUnit.Main" />
+      <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForDetailedConsentSettingsAsPost" />
+      <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForUpdatingConsentSettingsAsPost" />
+      <item itemvalue="PHPUnit.CookieConsentControllerKernelTest" />
+      <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequest" />
+      <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequestForUpdatingConsentSettings" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.CookieConsentControllerKernelTest" />
+        <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForDetailedConsentSettingsAsPost" />
+        <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForUpdatingConsentSettingsAsPost" />
+        <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequestForUpdatingConsentSettings" />
+        <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e0f80805-9710-4e35-bb34-17c49320dfe4" name="Changes" comment="" />
+      <created>1700145281551</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700145281551</updated>
+      <workItem from="1700145282608" duration="25314000" />
+      <workItem from="1700257121098" duration="6398000" />
+      <workItem from="1700404391657" duration="410000" />
+      <workItem from="1700470525942" duration="5966000" />
+      <workItem from="1701073106189" duration="594000" />
+      <workItem from="1701243200959" duration="1594000" />
+      <workItem from="1701416202180" duration="1838000" />
+      <workItem from="1701682194574" duration="1948000" />
+      <workItem from="1701694075843" duration="3809000" />
+      <workItem from="1701872572266" duration="31429000" />
+      <workItem from="1702323588916" duration="10052000" />
+      <workItem from="1702451930462" duration="2994000" />
+      <workItem from="1702481469403" duration="5837000" />
+      <workItem from="1702556350711" duration="10234000" />
+      <workItem from="1702755990346" duration="1925000" />
+      <workItem from="1703173210203" duration="3874000" />
+      <workItem from="1703453749167" duration="7781000" />
+      <workItem from="1704184518830" duration="3000" />
+      <workItem from="1707686695031" duration="2689000" />
+      <workItem from="1707689819807" duration="3886000" />
+      <workItem from="1708262924923" duration="2858000" />
+      <workItem from="1708280989917" duration="4000" />
+      <workItem from="1708281008027" duration="5711000" />
+      <workItem from="1708328029143" duration="79000" />
+      <workItem from="1708629631874" duration="29000" />
+      <workItem from="1708629671877" duration="24000" />
+      <workItem from="1708629841451" duration="599000" />
+      <workItem from="1708676910122" duration="60000" />
+      <workItem from="1708720772595" duration="4053000" />
+      <workItem from="1708976310700" duration="4080000" />
+      <workItem from="1709407038324" duration="8330000" />
+      <workItem from="1709545240750" duration="39000" />
+      <workItem from="1709586138261" duration="3614000" />
+      <workItem from="1711480958553" duration="952000" />
+      <workItem from="1712001917371" duration="971000" />
+      <workItem from="1712210747409" duration="569000" />
+      <workItem from="1712211808040" duration="1915000" />
+      <workItem from="1712243232430" duration="11306000" />
+      <workItem from="1712300549771" duration="131000" />
+      <workItem from="1712429848232" duration="2006000" />
+      <workItem from="1712587225982" duration="17697000" />
+      <workItem from="1712673244141" duration="952000" />
+      <workItem from="1712730267136" duration="1827000" />
+      <workItem from="1712739572107" duration="33000" />
+      <workItem from="1712768546350" duration="2297000" />
+      <workItem from="1712863237565" duration="1260000" />
+      <workItem from="1713206020473" duration="3911000" />
+      <workItem from="1713279464315" duration="1363000" />
+      <workItem from="1713337161471" duration="11000" />
+      <workItem from="1713377717354" duration="49000" />
+      <workItem from="1713377772928" duration="215000" />
+      <workItem from="1713377993365" duration="64000" />
+      <workItem from="1713378060904" duration="1868000" />
+      <workItem from="1713422562543" duration="1091000" />
+      <workItem from="1713515862024" duration="3853000" />
+      <workItem from="1713540261041" duration="6208000" />
+      <workItem from="1713606563261" duration="7622000" />
+      <workItem from="1713704132735" duration="742000" />
+      <workItem from="1713777502088" duration="4000" />
+      <workItem from="1714318677176" duration="2825000" />
+      <workItem from="1714381478864" duration="16250000" />
+      <workItem from="1714847899976" duration="2617000" />
+      <workItem from="1715630364935" duration="1560000" />
+      <workItem from="1715891370902" duration="9241000" />
+      <workItem from="1717922180687" duration="1505000" />
+      <workItem from="1718005021372" duration="7000" />
+      <workItem from="1718310791455" duration="3065000" />
+      <workItem from="1718396027959" duration="11994000" />
+      <workItem from="1718479982995" duration="11235000" />
+      <workItem from="1718603677293" duration="2407000" />
+      <workItem from="1718827661896" duration="6471000" />
+      <workItem from="1718865621849" duration="4286000" />
+      <workItem from="1718949281765" duration="1030000" />
+      <workItem from="1719250634814" duration="1260000" />
+      <workItem from="1719339455089" duration="6066000" />
+      <workItem from="1719607111022" duration="10009000" />
+      <workItem from="1719812601969" duration="3087000" />
+      <workItem from="1719952008109" duration="7130000" />
+      <workItem from="1720297690637" duration="2293000" />
+      <workItem from="1720465749080" duration="7079000" />
+      <workItem from="1720556680780" duration="3831000" />
+    </task>
+    <task id="LOCAL-00009" summary="Make cookie title and description customizable, fix naming for cookies">
+      <option name="closed" value="true" />
+      <created>1702165323612</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1702165323612</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fix naming for cookie categories">
+      <option name="closed" value="true" />
+      <created>1702165394949</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1702165394949</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fix naming for cookie categories">
+      <option name="closed" value="true" />
+      <created>1702165666189</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1702165666189</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fix test names">
+      <option name="closed" value="true" />
+      <created>1702165773077</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1702165773077</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fix tests, remove obsolete tests">
+      <option name="closed" value="true" />
+      <created>1702165852846</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1702165852846</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Update composer.json description">
+      <option name="closed" value="true" />
+      <created>1702324850258</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1702324850258</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add build script to transform Sass to CSS">
+      <option name="closed" value="true" />
+      <created>1702329802018</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1702329802018</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Add documentation comments to build.mjs">
+      <option name="closed" value="true" />
+      <created>1702330030426</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1702330030426</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Handle rejection of all cookies">
+      <option name="closed" value="true" />
+      <created>1702334636830</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1702334636830</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Remove unused dependencies">
+      <option name="closed" value="true" />
+      <created>1702335047007</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1702335047007</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Rearrange code in cookie_consent.js">
+      <option name="closed" value="true" />
+      <created>1702335199971</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1702335199971</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add rollup to bundle and minify cookie-consent.mjs">
+      <option name="closed" value="true" />
+      <created>1702453075914</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1702453075914</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add test for rejection of all cookies">
+      <option name="closed" value="true" />
+      <created>1702453275023</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1702453275023</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Form follows the styling configuration of the symfony twig bundle">
+      <option name="closed" value="true" />
+      <created>1702540770106</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1702540770106</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Add IntelliJ run configurations">
+      <option name="closed" value="true" />
+      <created>1702574373736</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1702574373736</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Add form_help to form theme">
+      <option name="closed" value="true" />
+      <created>1702574428831</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1702574428831</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Fix CookieConsentTypeTest.php, update TODO.md">
+      <option name="closed" value="true" />
+      <created>1702574888854</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1702574888854</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Update README.md">
+      <option name="closed" value="true" />
+      <created>1702575869321</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1702575869321</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Rename template override folder bundle name">
+      <option name="closed" value="true" />
+      <created>1702576369547</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1702576369547</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Add example to README.md regarding overwriting `required_cookies_category` block">
+      <option name="closed" value="true" />
+      <created>1702576570866</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1702576570866</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Add read more route option, allow customizing the required cookies title and description">
+      <option name="closed" value="true" />
+      <created>1703454641740</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1703454641741</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Ignore .phpunit.cache">
+      <option name="closed" value="true" />
+      <created>1703454654358</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1703454654358</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Fix missing bottom position styles">
+      <option name="closed" value="true" />
+      <created>1703455107665</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1703455107665</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add .min infix to stylesheets on build">
+      <option name="closed" value="true" />
+      <created>1703455685716</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1703455685716</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Add .min infix to script on build">
+      <option name="closed" value="true" />
+      <created>1703455802143</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1703455802143</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Fix references to stylesheets">
+      <option name="closed" value="true" />
+      <created>1703455902451</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1703455902451</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Fix reference to script in template">
+      <option name="closed" value="true" />
+      <created>1703456011748</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1703456011748</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Set class to form fields to select in form submission">
+      <option name="closed" value="true" />
+      <created>1703459314962</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1703459314962</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Use FormData in cookie-consent.mjs to submit data">
+      <option name="closed" value="true" />
+      <created>1703461428683</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1703461428683</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Prevent default submission for cookie consent form, refactor consent form creation">
+      <option name="closed" value="true" />
+      <created>1708271917593</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1708271917593</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Rename twig extension method">
+      <option name="closed" value="true" />
+      <created>1708272451674</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1708272451674</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Allow configuration of domain field for cookies">
+      <option name="closed" value="true" />
+      <created>1708285871862</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1708285871862</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Remove theming options light and dark, make form themeable from the outside easier">
+      <option name="closed" value="true" />
+      <created>1709414994211</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1709414994211</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Remove theming options light and dark, make form themeable from the outside easier">
+      <option name="closed" value="true" />
+      <created>1709415015938</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1709415015938</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Auto-reload browser via websocket client on file changed - use npm run watch">
+      <option name="closed" value="true" />
+      <created>1712261008430</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1712261008430</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Restructure project, add tests for ConsentSimpleType.php and ConsentDetailedType.php">
+      <option name="closed" value="true" />
+      <created>1714318776552</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1714318776552</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Migrate from form Collections to manuel foreach loops">
+      <option name="closed" value="true" />
+      <created>1714484885726</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1714484885726</updated>
+    </task>
+    <task id="LOCAL-00046" summary="git ignore /var">
+      <option name="closed" value="true" />
+      <created>1718604952607</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1718604952607</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Upgrade to PHP 8.3, add symfony/runtime to use in console command">
+      <option name="closed" value="true" />
+      <created>1718605022044</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1718605022044</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Migrate bundle to the recommended way for Symfony 7, use config definitions, configure services and parameters in CookieConsentBundle.php">
+      <option name="closed" value="true" />
+      <created>1718605136880</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1718605136880</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Split form types into simple and detailed type">
+      <option name="closed" value="true" />
+      <created>1718605183077</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1718605183077</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Update CookieConsentController, move service container configuration to CookieConsentBundle.php, remove services.yaml">
+      <option name="closed" value="true" />
+      <created>1718834110789</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1718834110789</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Refactor CookieConsentControllerTest.php">
+      <option name="closed" value="true" />
+      <created>1718866672716</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1718866672716</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Update consent form tests">
+      <option name="closed" value="true" />
+      <created>1718897628697</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1718897628697</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Fix form type for cookie consent value">
+      <option name="closed" value="true" />
+      <created>1719258641974</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1719258641974</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Update service definition for bundle">
+      <option name="closed" value="true" />
+      <created>1719956927835</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1719956927835</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Move routes definition to config/routes.php, add WebTestCase CookieConsentControllerKernelTest.php">
+      <option name="closed" value="true" />
+      <created>1720471592720</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1720471592720</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Update test name, add empty test">
+      <option name="closed" value="true" />
+      <created>1720471687596</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1720471687596</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Add integration test for simple form type">
+      <option name="closed" value="true" />
+      <created>1720558010053</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1720558010053</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+        <option value="GitHub.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="f7104729-8eea-44b7-b655-7a905bf416c9" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="f7104729-8eea-44b7-b655-7a905bf416c9">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/Users/oliver.witzki/dev/projects/cookie-consent-bundle/src/views" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add .min infix to script on build" />
+    <MESSAGE value="Fix references to stylesheets" />
+    <MESSAGE value="Fix reference to script in template" />
+    <MESSAGE value="Set class to form fields to select in form submission" />
+    <MESSAGE value="Use FormData in cookie-consent.mjs to submit data" />
+    <MESSAGE value="Prevent default submission for cookie consent form, refactor consent form creation" />
+    <MESSAGE value="Rename twig extension method" />
+    <MESSAGE value="Allow configuration of domain field for cookies" />
+    <MESSAGE value="Remove theming options light and dark, make form themeable from the outside easier" />
+    <MESSAGE value="Auto-reload browser via websocket client on file changed - use npm run watch" />
+    <MESSAGE value="Restructure project, add tests for ConsentSimpleType.php and ConsentDetailedType.php" />
+    <MESSAGE value="Migrate from form Collections to manuel foreach loops" />
+    <MESSAGE value="git ignore /var" />
+    <MESSAGE value="Upgrade to PHP 8.3, add symfony/runtime to use in console command" />
+    <MESSAGE value="Migrate bundle to the recommended way for Symfony 7, use config definitions, configure services and parameters in CookieConsentBundle.php" />
+    <MESSAGE value="Split form types into simple and detailed type" />
+    <MESSAGE value="Set binds for services" />
+    <MESSAGE value="Update CookieConsentController, move service container configuration to CookieConsentBundle.php, remove services.yaml" />
+    <MESSAGE value="Refactor CookieConsentControllerTest.php" />
+    <MESSAGE value="Update consent form tests" />
+    <MESSAGE value="Fix form type for cookie consent value" />
+    <MESSAGE value="Update service definition for bundle" />
+    <MESSAGE value="Move routes definition to config/routes.php, add WebTestCase CookieConsentControllerKernelTest.php" />
+    <MESSAGE value="Update test name, add empty test" />
+    <MESSAGE value="Add integration test for simple form type" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add integration test for simple form type" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/src/Form/ConsentCategoryType.php</url>
+          <line>28</line>
+          <option name="temporary" value="true" />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/vendor/symfony/form/Form.php</url>
+          <line>492</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Entity/CookieSettings.php</url>
+          <line>13</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/Cookie/CookieCheckerTest.php</url>
+          <line>34</line>
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/CookieConsentBundle.php</url>
+          <line>30</line>
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/Fixtures/App/AppKernel.php</url>
+          <line>29</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/CookieConsentController.php</url>
+          <line>53</line>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/cookie_consent_bundle@CookieHandlerTest_testSave.xml" NAME="CookieHandlerTest.testSave Coverage Results" MODIFIED="1700403592970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/cookie_consent_bundle@CookieConsentFormSubscriberTest.xml" NAME="CookieConsentFormSubscriberTest Coverage Results" MODIFIED="1709538485582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

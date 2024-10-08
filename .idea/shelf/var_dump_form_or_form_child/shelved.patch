@@ -1,0 +1,34 @@
+Index: Twig/CookieConsentTwigExtension.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\n\ndeclare(strict_types=1);\n\n\nnamespace huppys\\CookieConsentBundle\\Twig;\n\nuse huppys\\CookieConsentBundle\\Cookie\\CookieChecker;\nuse Symfony\\Component\\HttpFoundation\\Request;\nuse Twig\\Extension\\AbstractExtension;\nuse Twig\\TwigFunction;\n\nclass CookieConsentTwigExtension extends AbstractExtension\n{\n    public function __construct(private readonly string $cookieConsentTheme)\n    {\n    }\n\n    /**\n     * Register all custom twig functions.\n     */\n    public function getFunctions(): array\n    {\n        return [\n            new TwigFunction(\n                'cookieconsent_isCookieConsentSavedByUser',\n                [$this, 'isCookieConsentSavedByUser'],\n                ['needs_context' => true]\n            ),\n            new TwigFunction(\n                'cookieconsent_isCategoryAllowedByUser',\n                [$this, 'isCategoryAllowedByUser'],\n                ['needs_context' => true]\n            ),\n            new TwigFunction(\n                'cookieconsent_getTheme',\n                [$this, 'getTheme'],\n                ['needs_context' => false]\n            ),\n        ];\n    }\n\n    /**\n     * Checks if user has sent cookie consent form.\n     */\n    public function isCookieConsentSavedByUser(array $context): bool\n    {\n        $cookieChecker = $this->getCookieChecker($context['app']->getRequest());\n\n        return $cookieChecker->isCookieConsentSavedByUser();\n    }\n\n    /**\n     * Checks if user has given permission for cookie category.\n     */\n    public function isCategoryAllowedByUser(array $context, string $category): bool\n    {\n        $cookieChecker = $this->getCookieChecker($context['app']->getRequest());\n\n        return $cookieChecker->isCategoryAllowedByUser($category);\n    }\n\n    public function getTheme(): string\n    {\n        if (isset($this->cookieConsentTheme)) {\n            return $this->cookieConsentTheme;\n        }\n\n        return 'light'; // default theme\n    }\n\n    /**\n     * Get instance of CookieChecker.\n     */\n    private function getCookieChecker(Request $request): CookieChecker\n    {\n        return new CookieChecker($request);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Twig/CookieConsentTwigExtension.php b/Twig/CookieConsentTwigExtension.php
+--- a/Twig/CookieConsentTwigExtension.php	(revision a3b3705730bbb6619357e1c17548dea7db94bc03)
++++ b/Twig/CookieConsentTwigExtension.php	(date 1702559878652)
+@@ -37,6 +37,11 @@
+                 [$this, 'getTheme'],
+                 ['needs_context' => false]
+             ),
++            new TwigFunction(
++                'cookieconsent_dump',
++                [$this, 'dump'],
++                ['needs_context' => false]
++            ),
+         ];
+     }
+ 
+@@ -69,6 +74,11 @@
+         return 'light'; // default theme
+     }
+ 
++    public function dump(mixed $object): void
++    {
++        var_dump($object);
++    }
++
+     /**
+      * Get instance of CookieChecker.
+      */
