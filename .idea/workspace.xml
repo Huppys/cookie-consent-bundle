@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0f80805-9710-4e35-bb34-17c49320dfe4" name="Changes" comment="Add integration test for simple form type">
-      <change beforePath="$PROJECT_DIR$/templates/cookie_consent.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cookie_consent.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php-docker-settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php-docker-settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.run/build_dev.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/build_dev.run.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +27,7 @@
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
-      <interpreter name="php-dev:8.3.6" composer="composer" />
+      <interpreter name="php-dev:8.3.12" composer="composer" />
     </execution>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -82,12 +88,12 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Huppys/cookie-consent-bundle&quot;,
-    &quot;accountId&quot;: &quot;3c2abbc1-aa99-4e48-bd3b-bcd9c8a80a10&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Huppys/cookie-consent-bundle.git",
+    "accountId": "78d1ffc3-7927-42d7-82f8-c17d7709b292"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/vendor/symfony/config/Definition/Builder/ArrayNodeDefinition.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vendor/symfony/config/Definition/Builder/NodeBuilder.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
@@ -122,7 +128,7 @@
     </servers>
   </component>
   <component name="PhpWebServerValidation" path_to_validation_script="$PROJECT_DIR$" selected_validation_type="LOCAL" web_path_to_validation_script="http://127.0.0.1/" />
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php-dev:8.3.6">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php-dev:8.3.12">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/fidry/cpu-core-counter" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
@@ -136,7 +142,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
       <path value="$PROJECT_DIR$/vendor/symfony/expression-language" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/twig/twig" />
       <path value="$PROJECT_DIR$/vendor/clue/ndjson-react" />
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
@@ -234,6 +239,7 @@
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -319,12 +325,13 @@
     "javascript.nodejs.core.library.typings.version": "20.9.5",
     "jdk.selected.JAVA_MODULE": "Android API 33, extension level 3 Platform",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/oliver.witzki/dev/projects/cookie-consent-bundle/bin",
+    "last_opened_file_path": "/home/huppys/.bun/bin/bun",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
+    "nodejs_interpreter_path": "/home/huppys/.bun/bin/bun",
+    "nodejs_package_manager_path": "/home/huppys/.bun/bin/bun",
     "npm.build-server.executor": "Run",
     "npm.build:dev.executor": "Run",
     "npm.build:prod.executor": "Run",
@@ -333,7 +340,7 @@
     "org.rust.first.attach.projects": "true",
     "php.override.implement.member.chooser.php.doc": "NONE",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "settings.php.quality.tools.php.cs.fixer",
+    "settings.editor.selected.configurable": "settings.nodejs",
     "ts.external.directory.path": "/Users/oliver.witzki/Applications/IntelliJ IDEA Ultimate.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   },
@@ -358,7 +365,7 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.Main">
+  <component name="RunManager" selected="Docker.lint:twig">
     <configuration name="Pre-Commit tests" type="CompoundRunConfigurationType">
       <toRun name="lint:twig" type="docker-deploy" />
       <toRun name="Main" type="PHPUnitRunConfigurationType" />
@@ -414,6 +421,7 @@
         <script value="watch" />
       </scripts>
       <node-interpreter value="project" />
+      <package-manager value="$USER_HOME$/.bun/bin/bun" />
       <envs />
       <method v="2" />
     </configuration>
@@ -445,8 +453,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -539,6 +546,7 @@
       <workItem from="1720297690637" duration="2293000" />
       <workItem from="1720465749080" duration="7079000" />
       <workItem from="1720556680780" duration="3831000" />
+      <workItem from="1728417482600" duration="1768000" />
     </task>
     <task id="LOCAL-00009" summary="Make cookie title and description customizable, fix naming for cookies">
       <option name="closed" value="true" />

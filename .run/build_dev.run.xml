@@ -5,7 +5,7 @@
     <scripts>
       <script value="build:dev" />
     </scripts>
-    <node-interpreter value="$PROJECT_DIR$/../../machine/workspaces/default/c24-platform/c24-core/lib/node/node" />
+    <node-interpreter value="project" />
     <envs />
     <method v="2" />
   </configuration>

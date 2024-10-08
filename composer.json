@@ -4,7 +4,7 @@
   "description": "Symfony bundle to ask the visitors for their consent to use cookies to comply to AVG/GDPR.",
   "license": "MIT",
   "require": {
-    "php": "^8.1",
+    "php": "^8.3",
     "symfony/asset": "^v6.3.0 || ^7.0",
     "symfony/browser-kit": "^6.3.0 || ^7.0",
     "symfony/config": "^v6.3.0 || ^7.0",
@@ -18,7 +18,7 @@
     "symfony/translation": "^6.3.0 || ^7.0",
     "symfony/twig-bridge": "^6.3.0 || ^7.0",
     "symfony/twig-bundle": "^6.3.0 || ^7.0",
-    "twig/twig": "^3.0",
+    "twig/twig": "3.14.0.0",
     "ext-http": "*"
   },
   "require-dev": {
