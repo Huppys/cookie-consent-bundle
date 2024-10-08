@@ -1,8 +1,13 @@
+{# @formatter:off #}
 {% if position == 'dialog' %} {# Wrap in dialog tag if position is dialog #}
 <dialog class="cookie-consent-dialog">
-    {% endif %}
+{% endif %}
+{# @formatter:on #}
 
     <div class="cookie-consent cookie-consent--{{ position }}">
+        {% block pre_form %}
+        {% endblock pre_form %}
+
         <section class="cookie-consent-simple">
             {% block header %}
                 {% block title %}
@@ -20,65 +25,44 @@
                 {% endblock read_more %}
             {% endblock header %}
 
-            {% block submit_buttons %}
-                {{ form_start(simple_form, {'attr': {'class': 'cookie-consent__form js-consent-simple-form'}}) }}
+            {{ form_start(simple_form, {'attr': {'class': 'cookie-consent__form js-consent-simple-form'}}) }}
 
-                {% for child in simple_form %}
-                    {{ form_row(child) }}
-                {% endfor %}
-                {#                <button type="button" class="btn btn-primary js-accept-all-cookies">OK</button> #}
-                {#                <button type="button" class="btn btn-primary js-reject-all-cookies">Reject all</button> #}
-                {{ form_rest(simple_form) }}
+            {% for child in simple_form %}
+                {{ form_widget(child) }}
+            {% endfor %}
 
-                <button type="button" class="btn btn-text js-show-settings">Settings</button>
-                {{ form_end(simple_form) }}
+            {{ form_rest(simple_form) }}
 
-            {% endblock submit_buttons %}
+            <button type="button" class="btn btn-text js-show-settings">Settings</button>
+
+            {{ form_end(simple_form) }}
         </section>
 
         <section class="cookie-consent-detail" style="display: none;">
-            {% block pre_form %}
-            {% endblock pre_form %}
+            {{ form_start(detailed_form, {'attr': {'class': 'cookie-consent__form'}}) }}
 
-            {% block consent_form %}
-                {% block consent_form_start %}
-                    {{ form_start(simple_form, {'attr': {'class': 'cookie-consent__form'}}) }}
-                {% endblock consent_form_start %}
-                <div>
-                    {% block required_cookies_category %}
-                        <div>
-                            {% block required_cookies_category_label %}
-                                <p>{{ ('cookie_consent.required_cookies.title')|trans({}, 'CookieConsentBundle') }}</p>
-                            {% endblock required_cookies_category_label %}
-                            {% block required_cookies_category_body %}
-                                <p>{{ ('cookie_consent.required_cookies.description')|trans({}, 'CookieConsentBundle') }}</p>
-                            {% endblock required_cookies_category_body %}
-                        </div>
-                    {% endblock required_cookies_category %}
+            <div>
+                {% for child in detailed_form %}
+                    {% if not child.rendered %}
+                        {{- form_widget(child) -}}
+                    {% endif %}
+                {% endfor %}
+            </div>
 
-                    {% for child in simple_form %}
-                        {% if not child.rendered %}
-                            {{- form_widget(child) -}}
-                            {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
-                        {% endif %}
-                    {% endfor %}
-                </div>
+            {{ form_rest(detailed_form) }}
 
-                {% block consent_form_rest %}
-                    {{ form_rest(simple_form) }}
-                {% endblock consent_form_rest %}
-
-                {{ form_end(simple_form) }}
-            {% endblock consent_form %}
-
-            {% block post_form %}
-            {% endblock post_form %}
+            {{ form_end(detailed_form) }}
         </section>
+
+        {% block post_form %}
+        {% endblock post_form %}
     </div>
 
-    {% if position == 'dialog' %}
+{# @formatter:off #}
+{% if position == 'dialog' %}
 </dialog>
 {% endif %}
+{# @formatter:on #}
 
 {% block scripts %}
     <script type="text/javascript" src="{{ asset('bundles/cookieconsent/js/cookie-consent.min.js') }}"></script>

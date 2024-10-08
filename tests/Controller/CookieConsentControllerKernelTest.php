@@ -15,7 +15,7 @@ class CookieConsentControllerKernelTest extends WebTestCase
     }
 
     #[Test]
-    public function shouldSubmitRequestForUpdatingConsentSettingsAsPost(): void
+    public function shouldSubmitRequestForSimpleConsentSettingsAsPost(): void
     {
         $crawler = $this->givenSuccessfulRequest();
 
@@ -28,10 +28,24 @@ class CookieConsentControllerKernelTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    #[Test]
+    public function shouldSubmitRequestForDetailedConsentSettingsAsPost(): void
+    {
+        $crawler = $this->givenSuccessfulRequest();
+
+        $form = $crawler->selectButton('consent_detailed[accept_all]')->form();
+
+        $this->assertEquals('POST', $form->getMethod());
+
+        static::getClient()->submit($form, ['consent_detailed[accept_all]' => true]);
+
+        $this->assertResponseIsSuccessful();
+    }
+
     /**
      * @return void
      */
-    public function givenSuccessfulRequest(): Crawler
+    private function givenSuccessfulRequest(): Crawler
     {
         $client = static::createClient();
 
