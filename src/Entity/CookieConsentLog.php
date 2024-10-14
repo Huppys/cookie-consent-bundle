@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace huppys\CookieConsentBundle\Entity;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -16,22 +17,19 @@ class CookieConsentLog
     #[ORM\Column]
     protected int $id;
 
-
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 24)]
     protected string $ipAddress;
 
-
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     protected string $consentKey;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     protected string $cookieName;
 
-
-    #[ORM\Column(type: 'string', length: 1024)]
+    #[ORM\Column(type: Types::JSON, length: 2048)]
     protected string $cookieValue;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
     protected DateTime $timestamp;
 
     public function getId(): int

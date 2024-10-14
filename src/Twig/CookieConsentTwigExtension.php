@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace huppys\CookieConsentBundle\Twig;
 
 use huppys\CookieConsentBundle\Cookie\CookieChecker;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -57,7 +57,7 @@ class CookieConsentTwigExtension extends AbstractExtension
     /**
      * Get instance of CookieChecker.
      */
-    private function getCookieChecker(Request $request): CookieChecker
+    private function getCookieChecker(RequestStack $request): CookieChecker
     {
         return new CookieChecker($request);
     }

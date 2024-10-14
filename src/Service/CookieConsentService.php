@@ -11,6 +11,7 @@ class CookieConsentService
     {
         // create consent log object
 
+
         // persist consent log object
 
 

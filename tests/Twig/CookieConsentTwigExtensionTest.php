@@ -6,17 +6,18 @@ declare(strict_types=1);
 
 namespace huppys\CookieConsentBundle\tests\Twig;
 
+use huppys\CookieConsentBundle\Twig\CookieConsentTwigExtension;
 use PHPUnit\Framework\TestCase;
 
 class CookieConsentTwigExtensionTest extends TestCase
 {
-//    private CookieConsentTwigExtension $CookieConsentTwigExtension;
-//
-//    public function setUp(): void
-//    {
-//        $this->CookieConsentTwigExtension = new CookieConsentTwigExtension();
-//    }
-//
+    private CookieConsentTwigExtension $CookieConsentTwigExtension;
+
+    public function setUp(): void
+    {
+        $this->CookieConsentTwigExtension = new CookieConsentTwigExtension();
+    }
+
 //    public function testIsCookieConsentOptionSetByUser(): void
 //    {
 //        $request  = new Request();

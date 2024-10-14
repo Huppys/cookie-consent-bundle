@@ -4,22 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0f80805-9710-4e35-bb34-17c49320dfe4" name="Changes" comment="Add integration test for simple form type">
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php-docker-settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php-docker-settings.xml" afterDir="false" />
+    <list default="true" id="e0f80805-9710-4e35-bb34-17c49320dfe4" name="Changes" comment="Only build for symfony 7">
+      <change afterPath="$PROJECT_DIR$/.run/doctrine_database_create.run.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.run/doctrine_migrations_diff.run.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.run/doctrine_migrations_migrate.run.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.run/lint_twig.run.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.run/watch.run.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RELEASENOTES.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/.gitkeep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cookie-consent-bundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cookie-consent-bundle.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.run/build_dev.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/build_dev.run.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.run/helper.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/helper.run.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/BrowserCookie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BrowserCookie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/CookieConsentLog.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CookieConsentLog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/CookieSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/CookieSettings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/CookieConsentService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CookieConsentService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Twig/CookieConsentTwigExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/CookieConsentTwigExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Fixtures/App/AppKernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Fixtures/App/AppKernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Twig/CookieConsentTwigExtensionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Twig/CookieConsentTwigExtensionTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager">
+  <component name="ChangesViewManager" show_ignored="true">
     <option name="groupingKeys">
       <option value="directory" />
     </option>
@@ -88,12 +103,12 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Huppys/cookie-consent-bundle.git",
-    "accountId": "78d1ffc3-7927-42d7-82f8-c17d7709b292"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Huppys/cookie-consent-bundle.git&quot;,
+    &quot;accountId&quot;: &quot;78d1ffc3-7927-42d7-82f8-c17d7709b292&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/vendor/symfony/config/Definition/Builder/ArrayNodeDefinition.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/vendor/symfony/config/Definition/Builder/NodeBuilder.php" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
@@ -122,6 +137,7 @@
   <component name="PHPCodeSnifferProjectConfiguration">
     <option name="selectedConfigurationId" value="2602a412-e677-4d0b-8f8d-d98be8b55553" />
   </component>
+  <component name="PhpDebugGeneral" ignore_connections_through_unregistered_servers="false" max_simultaneous_connections="6" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="c535e95c-775a-4b40-9ff5-d8bf7d9b0b0a" name="localhost" port="443" use_path_mappings="true" />
@@ -240,6 +256,7 @@
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -257,9 +274,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Constants": "false",
+    "Docker.doctrine:database:create.executor": "Run",
     "Docker.helper.executor": "Run",
     "Docker.lint:twig.executor": "Run",
+    "Docker.make:database.executor": "Run",
+    "Docker.make:migration.executor": "Run",
+    "PHP Script.PHP make:migration.executor": "Run",
     "PHP Script.Unnamed.executor": "Run",
+    "PHP Script.doctrine:migrations:migrate.executor": "Run",
     "PHPUnit.ConsentCookieTypeTest.shouldSubmitValidSimpleConsentForm.executor": "Run",
     "PHPUnit.ConsentCookieTypeTest.shouldSubmitValidSimpleConsentFormOnRejectAll.executor": "Run",
     "PHPUnit.ConsentDetailedTypeTest (1).executor": "Run",
@@ -303,6 +325,8 @@
     "PHPUnit.CookieConsentFormSubscriberTest.shouldGetSubscribedEvents.executor": "Run",
     "PHPUnit.CookieConsentFormSubscriberTest.shouldHandleOnResponseEvent.executor": "Run",
     "PHPUnit.CookieConsentFormSubscriberTest.testOnResponse.executor": "Run",
+    "PHPUnit.CookieConsentTwigExtensionTest.executor": "Debug",
+    "PHPUnit.CookieConsentTwigExtensionTest.testIsCookieConsentOptionSetByUser.executor": "Debug",
     "PHPUnit.CookieConsentTypeTest.executor": "Run",
     "PHPUnit.CookieHandlerTest.executor": "Run",
     "PHPUnit.CookieHandlerTest.shouldSaveCookies.executor": "Run",
@@ -325,7 +349,7 @@
     "javascript.nodejs.core.library.typings.version": "20.9.5",
     "jdk.selected.JAVA_MODULE": "Android API 33, extension level 3 Platform",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/huppys/.bun/bin/bun",
+    "last_opened_file_path": "/home/huppys/projects/cookie-consent-bundle",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -340,11 +364,14 @@
     "org.rust.first.attach.projects": "true",
     "php.override.implement.member.chooser.php.doc": "NONE",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "settings.nodejs",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php.debug",
     "ts.external.directory.path": "/Users/oliver.witzki/Applications/IntelliJ IDEA Ultimate.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ],
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
       "TEXT"
     ]
@@ -352,20 +379,21 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/config/packages" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/bin" />
       <recent name="$PROJECT_DIR$/Resources/assets/scss" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Resources/assets/js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/Fixtures/App" />
       <recent name="$PROJECT_DIR$/config/definitions" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/Resources" />
-      <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.lint:twig">
+  <component name="RunManager" selected="PHP Script.doctrine:migrations:migrate">
     <configuration name="Pre-Commit tests" type="CompoundRunConfigurationType">
       <toRun name="lint:twig" type="docker-deploy" />
       <toRun name="Main" type="PHPUnitRunConfigurationType" />
@@ -373,14 +401,6 @@
     </configuration>
     <configuration name="CookieConsentControllerKernelTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" scope="Class" />
-      <method v="2" />
-    </configuration>
-    <configuration name="CookieConsentControllerKernelTest.shouldBlockGetRequest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" method="shouldBlockGetRequest" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="CookieConsentControllerKernelTest.shouldBlockGetRequestForUpdatingConsentSettings" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" method="shouldBlockGetRequestForUpdatingConsentSettings" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="CookieConsentControllerKernelTest.shouldSubmitRequestForDetailedConsentSettingsAsPost" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
@@ -391,38 +411,24 @@
       <TestRunner class="huppys\CookieConsentBundle\tests\Controller\CookieConsentControllerKernelTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Controller/CookieConsentControllerKernelTest.php" method="shouldSubmitRequestForUpdatingConsentSettingsAsPost" scope="Method" />
       <method v="2" />
     </configuration>
+    <configuration name="CookieConsentTwigExtensionTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="huppys\CookieConsentBundle\tests\Twig\CookieConsentTwigExtensionTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Twig/CookieConsentTwigExtensionTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CookieConsentTwigExtensionTest.testIsCookieConsentOptionSetByUser" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="huppys\CookieConsentBundle\tests\Twig\CookieConsentTwigExtensionTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Twig/CookieConsentTwigExtensionTest.php" method="testIsCookieConsentOptionSetByUser" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
-    <configuration name="lint:twig" type="docker-deploy" factoryName="docker-image" server-name="Docker">
-      <deployment type="docker-image">
-        <settings>
-          <option name="imageTag" value="php-dev:8.3.6" />
-          <option name="command" value="php /opt/project/bin/console lint:twig /opt/project/templates/" />
-          <option name="containerName" value="cookie-consent-bundle-dev-helper" />
-          <option name="commandLineOptions" value="-d -i -t" />
-          <option name="volumeBindings">
-            <list>
-              <DockerVolumeBindingImpl>
-                <option name="containerPath" value="/opt/project" />
-                <option name="hostPath" value="$PROJECT_DIR$" />
-              </DockerVolumeBindingImpl>
-            </list>
-          </option>
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="watch" type="js.build_tools.npm" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="watch" />
-      </scripts>
-      <node-interpreter value="project" />
-      <package-manager value="$USER_HOME$/.bun/bin/bun" />
-      <envs />
+    <configuration name="doctrine:database:create" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="/opt/project/bin/console" scriptParameters="doctrine:database:create">
+      <CommandLine pass_parent_envs="false">
+        <envs>
+          <env name="APP_ENV" value="dev" />
+        </envs>
+      </CommandLine>
       <method v="2" />
     </configuration>
     <list>
@@ -430,23 +436,27 @@
       <item itemvalue="Compound.Pre-Commit tests" />
       <item itemvalue="Docker.helper" />
       <item itemvalue="Docker.lint:twig" />
+      <item itemvalue="Docker.doctrine:database:create" />
       <item itemvalue="npm.watch" />
       <item itemvalue="npm.build:dev" />
       <item itemvalue="npm.build:prod" />
+      <item itemvalue="PHP Script.doctrine:migrations:migrate" />
+      <item itemvalue="PHP Script.doctrine:database:create" />
+      <item itemvalue="PHP Script.doctrine:migrations:diff" />
       <item itemvalue="PHPUnit.Main" />
+      <item itemvalue="PHPUnit.CookieConsentTwigExtensionTest" />
+      <item itemvalue="PHPUnit.CookieConsentTwigExtensionTest.testIsCookieConsentOptionSetByUser" />
       <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForDetailedConsentSettingsAsPost" />
       <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForUpdatingConsentSettingsAsPost" />
       <item itemvalue="PHPUnit.CookieConsentControllerKernelTest" />
-      <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequest" />
-      <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequestForUpdatingConsentSettings" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.CookieConsentTwigExtensionTest" />
+        <item itemvalue="PHPUnit.CookieConsentTwigExtensionTest.testIsCookieConsentOptionSetByUser" />
         <item itemvalue="PHPUnit.CookieConsentControllerKernelTest" />
         <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForDetailedConsentSettingsAsPost" />
         <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldSubmitRequestForUpdatingConsentSettingsAsPost" />
-        <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequestForUpdatingConsentSettings" />
-        <item itemvalue="PHPUnit.CookieConsentControllerKernelTest.shouldBlockGetRequest" />
       </list>
     </recent_temporary>
   </component>
@@ -546,23 +556,9 @@
       <workItem from="1720297690637" duration="2293000" />
       <workItem from="1720465749080" duration="7079000" />
       <workItem from="1720556680780" duration="3831000" />
-      <workItem from="1728417482600" duration="1768000" />
-    </task>
-    <task id="LOCAL-00009" summary="Make cookie title and description customizable, fix naming for cookies">
-      <option name="closed" value="true" />
-      <created>1702165323612</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1702165323612</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Fix naming for cookie categories">
-      <option name="closed" value="true" />
-      <created>1702165394949</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1702165394949</updated>
+      <workItem from="1728417482600" duration="4432000" />
+      <workItem from="1728676651364" duration="13824000" />
+      <workItem from="1728937486298" duration="1554000" />
     </task>
     <task id="LOCAL-00011" summary="Fix naming for cookie categories">
       <option name="closed" value="true" />
@@ -940,7 +936,23 @@
       <option name="project" value="LOCAL" />
       <updated>1720558010053</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Update dependencies and project settings">
+      <option name="closed" value="true" />
+      <created>1728419748878</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1728419748878</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Only build for symfony 7">
+      <option name="closed" value="true" />
+      <created>1728419881670</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1728419881670</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1000,8 +1012,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add .min infix to script on build" />
-    <MESSAGE value="Fix references to stylesheets" />
     <MESSAGE value="Fix reference to script in template" />
     <MESSAGE value="Set class to form fields to select in form submission" />
     <MESSAGE value="Use FormData in cookie-consent.mjs to submit data" />
@@ -1025,7 +1035,9 @@
     <MESSAGE value="Move routes definition to config/routes.php, add WebTestCase CookieConsentControllerKernelTest.php" />
     <MESSAGE value="Update test name, add empty test" />
     <MESSAGE value="Add integration test for simple form type" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add integration test for simple form type" />
+    <MESSAGE value="Update dependencies and project settings" />
+    <MESSAGE value="Only build for symfony 7" />
+    <option name="LAST_COMMIT_MESSAGE" value="Only build for symfony 7" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1043,11 +1055,6 @@
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Entity/CookieSettings.php</url>
-          <line>13</line>
-          <option name="timeStamp" value="103" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/Cookie/CookieCheckerTest.php</url>
           <line>34</line>
           <option name="timeStamp" value="111" />
@@ -1058,14 +1065,14 @@
           <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/tests/Fixtures/App/AppKernel.php</url>
-          <line>29</line>
-          <option name="timeStamp" value="116" />
+          <url>file://$PROJECT_DIR$/src/Twig/CookieConsentTwigExtension.php</url>
+          <line>43</line>
+          <option name="timeStamp" value="123" />
         </line-breakpoint>
-        <line-breakpoint type="php">
-          <url>file://$PROJECT_DIR$/src/Controller/CookieConsentController.php</url>
-          <line>53</line>
-          <option name="timeStamp" value="120" />
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/Fixtures/App/AppKernel.php</url>
+          <line>44</line>
+          <option name="timeStamp" value="134" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -8,3 +8,4 @@ vendor/
 /.phpunit.cache
 /.php-cs-fixer.cache
 /var
+/data/test.db

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="doctrine:migrations:diff" type="PhpLocalRunConfigurationType" factoryName="PHP Console" focusToolWindowBeforeRun="true" path="/opt/project/bin/console" scriptParameters="doctrine:migrations:diff -q">
+    <CommandLine pass_parent_envs="false">
+      <envs>
+        <env name="APP_ENV" value="dev" />
+      </envs>
+    </CommandLine>
+    <method v="2" />
+  </configuration>
+</component>

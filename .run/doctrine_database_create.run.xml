@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="helper" type="docker-deploy" factoryName="docker-image" server-name="Docker">
+  <configuration default="false" name="doctrine:database:create" type="docker-deploy" factoryName="docker-image" server-name="Docker">
     <deployment type="docker-image">
       <settings>
         <option name="imageTag" value="php-dev:latest" />
-        <option name="command" value="/bin/bash" />
+        <option name="command" value="php /opt/project/bin/console doctrine:database:create" />
         <option name="containerName" value="cookie-consent-bundle-dev-helper" />
         <option name="envVars">
           <list>
@@ -17,7 +17,7 @@
             </DockerEnvVarImpl>
           </list>
         </option>
-        <option name="commandLineOptions" value="-d -t -i" />
+        <option name="commandLineOptions" value="-d -i -t" />
         <option name="volumeBindings">
           <list>
             <DockerVolumeBindingImpl>
