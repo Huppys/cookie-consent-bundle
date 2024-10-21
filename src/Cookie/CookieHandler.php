@@ -27,7 +27,6 @@ class CookieHandler
             $config['name_prefix'],
             $this->castCookieConfigToCookieSetting($config['cookies']['consent_cookie']),
             $this->castCookieConfigToCookieSetting($config['cookies']['consent_key_cookie']),
-            $this->castCookieConfigToCookieSetting($config['cookies']['consent_categories_cookie']),
         );
     }
 
@@ -60,14 +59,6 @@ class CookieHandler
         $consentKeyCookie = $this->cookieSettings->getConsentKeyCookie();
         $this->saveCookie($consentKeyCookie->getName(), $cookieConsentKey, $consentKeyCookie->getExpires(), $consentKeyCookie->getDomain(),
             $consentKeyCookie->isSecure(), $consentKeyCookie->isHttpOnly(), $consentKeyCookie->getSameSite(), $response);
-
-        $consentCategoriesCookie = $this->cookieSettings->getConsentCategoriesCookie();
-        foreach ($categories as $category => $permitted) {
-            if ($permitted != null) {
-                $this->saveCookie($consentCategoriesCookie->getName() . '-' . $category, $permitted, $consentCategoriesCookie->getExpires(), $consentCategoriesCookie->getDomain(),
-                    $consentCategoriesCookie->isSecure(), $consentCategoriesCookie->isHttpOnly(), $consentCategoriesCookie->getSameSite(), $response);
-            }
-        }
     }
 
     /**

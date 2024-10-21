@@ -15,18 +15,17 @@ function addCookieSettingsNode(): ArrayNodeDefinition
     $node
         ->addDefaultsIfNotSet()
         ->children()
-        ->scalarNode('name_prefix')
-        ->defaultValue('')
-        ->info('Prefix the cookie names, if necessary')
+            ->scalarNode('name_prefix')
+            ->defaultValue('')
+            ->info('Prefix the cookie names, if necessary')
         ->end()
         ->arrayNode('cookies')
-        ->addDefaultsIfNotSet()
-        ->children()
-        ->append(addCookie('consent_cookie', CookieName::COOKIE_CONSENT_NAME))
-        ->append(addCookie('consent_key_cookie', CookieName::COOKIE_CONSENT_KEY_NAME))
-        ->append(addCookie('consent_categories_cookie', CookieName::COOKIE_CATEGORY_NAME_PREFIX))
-        ->end()
-        ->end()
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->append(addCookie('consent_cookie', CookieName::COOKIE_CONSENT_NAME))
+                ->append(addCookie('consent_key_cookie', CookieName::COOKIE_CONSENT_KEY_NAME))
+                ->end()
+            ->end()
         ->end();
     // @formatter:on
 

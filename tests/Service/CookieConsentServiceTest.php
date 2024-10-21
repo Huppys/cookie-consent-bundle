@@ -1,6 +1,6 @@
 <?php
 
-namespace Service;
+namespace huppys\CookieConsentBundle\tests\Service;
 
 use PHPUnit\Framework\TestCase;
 

@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CookieConsentRepository
+class CookieConsentLogRepository
 {
     private EntityManagerInterface $entityManager;
 
@@ -21,18 +21,18 @@ class CookieConsentRepository
 
     public function rejectAllCookies(Request $request, Response $response)
     {
-        $cookieLog = new CookieConsentLog();
-
-        $cookieLog->setCookieName();
-        $cookieLog->setCookieValue();
-        $cookieLog->setConsentKey();
-        $cookieLog->setIpAddress();
-        $cookieLog->setTimestamp();
-
-        $this->entityManager->persist($cookieLog);
-
-        $this->entityManager->flush();
-
-        $response->headers->setCookie();
+//        $cookieLog = new CookieConsentLog();
+//
+//        $cookieLog->setCookieName();
+//        $cookieLog->setCookieValue();
+//        $cookieLog->setConsentKey();
+//        $cookieLog->setIpAddress();
+//        $cookieLog->setTimestamp();
+//
+//        $this->entityManager->persist($cookieLog);
+//
+//        $this->entityManager->flush();
+//
+//        $response->headers->setCookie();
     }
 }

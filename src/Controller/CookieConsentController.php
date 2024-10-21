@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -37,7 +38,9 @@ class CookieConsentController
         private readonly string|null          $formAction,
         private readonly string|null          $readMoreRoute,
         private readonly CookieConsentService $cookieConsentService,
-        private readonly string               $position
+        private readonly string               $position,
+        private readonly RequestStack         $requestStack,
+        private readonly LoggerInterface      $logger
     )
     {
     }
@@ -46,8 +49,10 @@ class CookieConsentController
      * Show cookie consent.
      */
     #[Route('/cookie-consent/view', name: 'cookie_consent.view')]
-    public function view(Request $request): Response
+    public function view(): Response
     {
+        $request = $this->requestStack->getCurrentRequest();
+
         $this->setLocale($request);
 
         try {
@@ -71,12 +76,15 @@ class CookieConsentController
     }
 
     #[Route('/cookie-consent/update', name: 'cookie-consent.update')]
-    public function update(Request $request, Response $response, LoggerInterface $logger): Response
+    public function update(): Response
     {
-        if ($request->getMethod() != HTTP_METH_POST) {
-            throw new MethodNotAllowedException([HTTP_METH_POST]);
+        $request = $this->requestStack->getCurrentRequest();
+
+        if ($request->getMethod() != Request::METHOD_POST) {
+            throw new MethodNotAllowedException([Request::METHOD_POST]);
         }
 
+        // TODO: Add validation via doctrine validators: https://symfony.com/doc/current/doctrine.html#validating-objects
         $form = $this->createSimpleConsentForm();
         $form->handleRequest($request);
 
@@ -86,32 +94,35 @@ class CookieConsentController
                 $rejectAll = $rejectAllButton->isClicked();
 
                 if ($rejectAll) {
-                    // tell consent manager service to set cookie values accordingly
-                    $this->cookieConsentService->rejectAllCookies($request, $response);
+                    // tell consent manager service to reject all cookies, sets consent cookie to false
+                    $responseHeaders = $this->cookieConsentService->rejectAllCookies($request);
 
-                    return new JsonResponse('ok', Response::HTTP_OK);
+                    return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
                 }
-            } else if ($acceptAllButton = $form->get(FormSubmitName::ACCEPT_ALL)) {
+            }
+
+            if ($acceptAllButton = $form->get(FormSubmitName::ACCEPT_ALL)) {
                 $acceptAll = $acceptAllButton->isClicked();
 
                 if ($acceptAll) {
                     // tell consent manager service to set cookie values accordingly
-                    $this->cookieConsentService->acceptAllCookies($form->getData(), $request, $response);
+                    $responseHeaders = $this->cookieConsentService->acceptAllCookies($request);
 
-                    return new JsonResponse('ok', Response::HTTP_OK);
+                    return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
                 }
-            } else {
-                $this->cookieConsentService->saveConsentSettings($form->getData(), $request, $response);
-
-                return new JsonResponse('ok', Response::HTTP_CREATED);
             }
 
+            $this->cookieConsentService->saveConsentSettings($form->getData(), $request);
+
+            return new JsonResponse('ok', Response::HTTP_CREATED);
+
+
         } else if ($form->isSubmitted() && $form->getClickedButton() == null) {
-            $logger->error('Invalid form passed to consent manager update');
+            $this->logger->error('Invalid form passed to consent manager update');
             return new JsonResponse('error', status: Response::HTTP_BAD_REQUEST);
         }
 
-        $logger->error('Error while updating cookies via consent manager');
+        $this->logger->error('Error while updating cookies via consent manager');
         return new JsonResponse('error', status: Response::HTTP_BAD_REQUEST);
     }
 

@@ -49,12 +49,7 @@ class CookieLogger
 
     protected function persistCookieConsentLog(string $category, string $value, string $ip, string $key): void
     {
-        $cookieConsentLog = (new CookieConsentLog())
-            ->setIpAddress($ip)
-            ->setConsentKey($key)
-            ->setCookieName($category)
-            ->setCookieValue($value)
-            ->setTimestamp(new \DateTime());
+        $cookieConsentLog = (new CookieConsentLog($ip, $key, $category, $value));
 
         $this->entityManager->persist($cookieConsentLog);
     }

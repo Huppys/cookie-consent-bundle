@@ -23,27 +23,17 @@ class CookieHandlerTest extends TestCase
     #[Test]
     public function shouldSaveCookies(): void
     {
-
         $cookieConfig = $this->getCookieDefaultConfig();
         $this->saveCookieHandler($cookieConfig);
 
         $this->cookies = $this->response->headers->getCookies();
 
-        $this->assertCount(5, $this->cookies);
+        $this->assertCount(2, $this->cookies);
 
         $this->assertSame($cookieConfig['name_prefix'] . 'consent', $this->cookies[0]->getName());
 
         $this->assertSame($cookieConfig['name_prefix'] . 'consent-key', $this->cookies[1]->getName());
         $this->assertSame('key-test', $this->cookies[1]->getValue());
-
-        $this->assertSame($cookieConfig['name_prefix'] . 'consent-categories-analytics', $this->cookies[2]->getName());
-        $this->assertSame('true', $this->cookies[2]->getValue());
-
-        $this->assertSame($cookieConfig['name_prefix'] . 'consent-categories-social_media', $this->cookies[3]->getName());
-        $this->assertSame('true', $this->cookies[3]->getValue());
-
-        $this->assertSame($cookieConfig['name_prefix'] . 'consent-categories-tracking', $this->cookies[4]->getName());
-        $this->assertSame('false', $this->cookies[4]->getValue());
     }
 
     #[Test]
@@ -116,13 +106,6 @@ class CookieHandlerTest extends TestCase
                     'same_site' => 'strict',
                     'expires' => 'P180D',
                 ],
-                'consent_categories_cookie' => [
-                    'name' => 'consent-categories',
-                    'http_only' => true,
-                    'secure' => true,
-                    'same_site' => 'lax',
-                    'expires' => 'P180D',
-                ],
             ]
         ];
     }
@@ -149,13 +132,6 @@ class CookieHandlerTest extends TestCase
                     'http_only' => true,
                     'secure' => true,
                     'same_site' => 'strict',
-                    'expires' => 'P180D',
-                ],
-                'consent_categories_cookie' => [
-                    'name' => 'consent-categories',
-                    'http_only' => true,
-                    'secure' => true,
-                    'same_site' => 'lax',
                     'expires' => 'P180D',
                 ],
             ]

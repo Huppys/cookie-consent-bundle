@@ -23,15 +23,11 @@ class CookieSettings
     #[ORM\OneToOne]
     private BrowserCookie $consentKeyCookie;
 
-    #[ORM\OneToOne]
-    private BrowserCookie $consentCategoriesCookie;
-
-    public function __construct(string $namePrefix, BrowserCookie $consentCookie, BrowserCookie $consentKeyCookie, BrowserCookie $consentCategoriesCookie)
+    public function __construct(string $namePrefix, BrowserCookie $consentCookie, BrowserCookie $consentKeyCookie)
     {
         $this->namePrefix = $namePrefix;
         $this->consentCookie = $consentCookie;
         $this->consentKeyCookie = $consentKeyCookie;
-        $this->consentCategoriesCookie = $consentCategoriesCookie;
     }
 
     public function getNamePrefix(): string
@@ -47,10 +43,5 @@ class CookieSettings
     public function getConsentKeyCookie(): BrowserCookie
     {
         return $this->consentKeyCookie;
-    }
-
-    public function getConsentCategoriesCookie(): BrowserCookie
-    {
-        return $this->consentCategoriesCookie;
     }
 }

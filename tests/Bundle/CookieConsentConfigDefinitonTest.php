@@ -85,12 +85,6 @@ cookie_settings:
             secure: true
             same_site: 'strict'
             expires: 'P180D'
-        consent_categories_cookie:
-            name: 'consent_categories'
-            http_only: true
-            secure: true
-            same_site: 'lax'
-            expires: 'P180D'
 position: 'top'
 csrf_protection: true
 EOF;

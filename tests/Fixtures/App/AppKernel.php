@@ -11,6 +11,7 @@ use Symfony\Bundle\MakerBundle\MakerBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
@@ -39,7 +40,14 @@ class AppKernel extends Kernel
             'test' => true,
             'default_locale' => 'en',
             'translator' =>
-                ['default_path' => '%kernel.project_dir%/translations']
+                ['default_path' => '%kernel.project_dir%/translations'],
+            'session' => [
+                'enabled' => true,
+                'cookie_secure' => 'auto',
+                'cookie_samesite' => Cookie::SAMESITE_STRICT,
+                'handler_id' => 'session.handler.native_file',
+                'save_path' => '%kernel.project_dir%/var/sessions/%kernel.environment%'
+            ]
         ]);
 
         $container->loadFromExtension('doctrine', [

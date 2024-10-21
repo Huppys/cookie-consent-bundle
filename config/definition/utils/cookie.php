@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\HttpFoundation\Cookie;
 
 function addCookie(string $key, string $name): ArrayNodeDefinition
 {
@@ -31,7 +32,7 @@ function addCookie(string $key, string $name): ArrayNodeDefinition
         ->enumNode('same_site')
         ->info('Set the value for the SameSite attribute of the cookie')
         ->values(['lax', 'strict'])
-        ->defaultValue('lax')
+        ->defaultValue(Cookie::SAMESITE_LAX)
         ->end()
         ->variableNode('domain')
         ->info('Set the value for the Domain attribute of the cookie')

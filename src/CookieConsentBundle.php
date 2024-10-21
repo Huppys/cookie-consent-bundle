@@ -10,7 +10,9 @@ use huppys\CookieConsentBundle\Cookie\CookieHandler;
 use huppys\CookieConsentBundle\EventSubscriber\CookieConsentFormSubscriber;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
-use huppys\CookieConsentBundle\Repository\CookieConsentRepository;
+use huppys\CookieConsentBundle\Mapper\CookieConfigMapper;
+use huppys\CookieConsentBundle\Repository\CookieConsentLogRepository;
+use huppys\CookieConsentBundle\Service\CookieConsentService;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -47,10 +49,11 @@ class CookieConsentBundle extends AbstractBundle
         $services->set(CookieConsentController::class)->public()->autowire(true);
 
         // configure manually wired constructor arguments for private services
+        $services->set(CookieConsentService::class)->args([$config['cookie_settings'], $config['persist_consent']]);
         $services->set(CookieChecker::class)->args([service('request_stack')]);
         $services->set(CookieHandler::class)->args([$config['cookie_settings']]);
-        $services->set(CookieConsentFormSubscriber::class)->args([$config['persist_consent']]);
-        $services->set(CookieConsentRepository::class)->args([service('doctrine')]);
+        $services->set(CookieConfigMapper::class)->args([$config['cookie_settings']['name_prefix']]);
+        $services->set(CookieConsentLogRepository::class)->args([service('doctrine')]);
         $services->set(ConsentSimpleType::class)->tag('form.type')->args([service('translator')]);
         $services->set(ConsentDetailedType::class)->tag('form.type')->args([service('translator')]);
 

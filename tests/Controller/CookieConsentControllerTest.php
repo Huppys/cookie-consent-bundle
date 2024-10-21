@@ -17,7 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Log\Logger;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
@@ -45,6 +47,8 @@ class CookieConsentControllerTest extends TestCase
         $this->translator = $this->createMock(Translator::class);
         $this->router = $this->createMock(RouterInterface::class);
         $this->cookieConsentService = $this->createMock(CookieConsentService::class);
+        $this->requestStack = $this->createMock(RequestStack::class);
+        $this->logger = $this->createMock(Logger::class);
 
         $this->cookieConsentController = new CookieConsentController(
             $this->templating,
@@ -55,7 +59,9 @@ class CookieConsentControllerTest extends TestCase
             null,
             null,
             $this->cookieConsentService,
-            'top'
+            'top',
+            $this->requestStack,
+            $this->logger
         );
     }
 
@@ -69,7 +75,7 @@ class CookieConsentControllerTest extends TestCase
 
         $this->givenTemplateRendersTest();
 
-        $response = $this->cookieConsentController->view(new Request());
+        $response = $this->cookieConsentController->view();
 
         $this->assertInstanceOf(Response::class, $response);
     }

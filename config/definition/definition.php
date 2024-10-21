@@ -28,7 +28,7 @@ return static function (DefinitionConfigurator $definition) {
                     ->defaultTrue()
                 ->end()
                 ->scalarNode('form_action')
-                    ->defaultNull()
+                    ->defaultValue('cookie-consent.update')
                 ->end()
                 ->scalarNode('read_more_route')
                     ->defaultNull()

@@ -5,7 +5,6 @@
   "license": "MIT",
   "require": {
     "php": "^8.3",
-    "ext-http": "*",
     "doctrine/doctrine-migrations-bundle": "^3.3",
     "symfony/asset": "^7.0",
     "symfony/browser-kit": "^7.0",
@@ -14,6 +13,7 @@
     "symfony/doctrine-bridge": "^7.0",
     "symfony/expression-language": "^7.0",
     "symfony/form": "^7.0",
+    "symfony/http-foundation": "^7.1",
     "symfony/http-kernel": "^7.0",
     "symfony/orm-pack": "^2.4",
     "symfony/security-csrf": "^7.0",

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace huppys\CookieConsentBundle\Entity;
 
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use huppys\CookieConsentBundle\Repository\CookieConsentLogRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CookieConsentLogRepository::class)]
 #[ORM\Table(name: "cookieconsent_log")]
 class CookieConsentLog
 {
@@ -30,7 +32,22 @@ class CookieConsentLog
     protected string $cookieValue;
 
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
-    protected DateTime $timestamp;
+    protected DateTimeImmutable $timestamp;
+
+    /**
+     * @param string $ipAddress
+     * @param string $consentKey
+     * @param string $cookieName
+     * @param string $cookieValue
+     */
+    public function __construct(string $ipAddress, string $consentKey, string $cookieName, string $cookieValue)
+    {
+        $this->ipAddress = $ipAddress;
+        $this->consentKey = $consentKey;
+        $this->cookieName = $cookieName;
+        $this->cookieValue = $cookieValue;
+        $this->timestamp = new \DateTimeImmutable();
+    }
 
     public function getId(): int
     {
