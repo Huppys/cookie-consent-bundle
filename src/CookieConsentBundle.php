@@ -7,7 +7,6 @@ namespace huppys\CookieConsentBundle;
 use huppys\CookieConsentBundle\Controller\CookieConsentController;
 use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Cookie\CookieHandler;
-use huppys\CookieConsentBundle\EventSubscriber\CookieConsentFormSubscriber;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
 use huppys\CookieConsentBundle\Mapper\CookieConfigMapper;

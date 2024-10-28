@@ -26,7 +26,7 @@ class CookieConsentControllerKernelTest extends WebTestCase
 
         static::getClient()->submit($form, ['consent_simple[accept_all]' => true]);
 
-        $this->assertResponseIsSuccessful();
+        $this->allCookiesAllowed();
     }
 
     #[Test]
@@ -55,7 +55,7 @@ class CookieConsentControllerKernelTest extends WebTestCase
 
         static::getClient()->submit($form, ['consent_detailed[accept_all]' => true]);
 
-        $this->assertResponseIsSuccessful();
+        $this->allCookiesAllowed();
     }
 
     /**
@@ -70,5 +70,15 @@ class CookieConsentControllerKernelTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         return $crawler;
+    }
+
+    /**
+     * @return void
+     */
+    public function allCookiesAllowed(): void
+    {
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHasCookie(CookieName::COOKIE_CONSENT_NAME);
+        $this->assertResponseHasCookie(CookieName::COOKIE_CONSENT_KEY_NAME);
     }
 }

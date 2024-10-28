@@ -30,4 +30,9 @@ class ConsentDetailedConfiguration
     {
         $this->description = $description;
     }
+
+    public function setCategories(Collection $categories): void
+    {
+        $this->categories = $categories;
+    }
 }

@@ -4,7 +4,6 @@ namespace huppys\CookieConsentBundle\Form;
 
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,12 +26,13 @@ class ConsentDetailedType extends AbstractType
     {
         $builder->add('description');
         // build collection of categories
-        $builder->add('categories', CollectionType::class, [
-            'entry_type' => ConsentCategoryType::class,
-        ]);
+        // TODO: Add form elements from configuration
+//        $builder->add('categories', CollectionType::class, [
+//            'entry_type' => ConsentCategoryType::class,
+//        ]);
 
 
-        // add buttons
+        // add submit buttons
         $builder
             ->add(FormSubmitName::ACCEPT_ALL, SubmitType::class, [
                 'label' => $this->translate('cookie_consent.accept_all'),
@@ -60,11 +60,11 @@ class ConsentDetailedType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => ConsentDetailedConfiguration::class,
-                                   'translation_domain' => 'CookieConsentBundle',
-                                   'csrf_protection' => $this->csrfProtection,
-                                   'csrf_token_id' => 'csrf_cookie_consent',
-                               ]);
+            'data_class' => ConsentDetailedConfiguration::class,
+            'translation_domain' => 'CookieConsentBundle',
+            'csrf_protection' => $this->csrfProtection,
+            'csrf_token_id' => 'csrf_cookie_consent',
+        ]);
     }
 
     protected function translate(string $key): string

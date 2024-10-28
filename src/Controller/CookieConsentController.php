@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace huppys\CookieConsentBundle\Controller;
 
+use Exception;
 use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
@@ -85,7 +86,7 @@ class CookieConsentController
         }
 
         // TODO: Add validation via doctrine validators: https://symfony.com/doc/current/doctrine.html#validating-objects
-        $form = $this->createSimpleConsentForm();
+        $form = $this->getForm($request);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -94,10 +95,15 @@ class CookieConsentController
                 $rejectAll = $rejectAllButton->isClicked();
 
                 if ($rejectAll) {
-                    // tell consent manager service to reject all cookies, sets consent cookie to false
-                    $responseHeaders = $this->cookieConsentService->rejectAllCookies($request);
+                    try {
+                        // tell consent manager service to reject all cookies, sets consent cookie to false
+                        $responseHeaders = $this->cookieConsentService->rejectAllCookies($request);
 
-                    return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
+                        return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
+                    } catch (Exception $exception) {
+                        // TODO: handle exception
+                    }
+
                 }
             }
 
@@ -105,10 +111,14 @@ class CookieConsentController
                 $acceptAll = $acceptAllButton->isClicked();
 
                 if ($acceptAll) {
-                    // tell consent manager service to set cookie values accordingly
-                    $responseHeaders = $this->cookieConsentService->acceptAllCookies($request);
+                    try {
+                        // tell consent manager service to set cookie values accordingly
+                        $responseHeaders = $this->cookieConsentService->acceptAllCookies($form->getData(), $request);
 
-                    return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
+                        return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
+                    } catch (Exception $exception) {
+                        // TODO: handle exception
+                    }
                 }
             }
 
@@ -174,5 +184,16 @@ class CookieConsentController
             $this->translator->setLocale($locale);
             $request->setLocale($locale);
         }
+    }
+
+    private function getForm(Request $request): ?FormInterface
+    {
+        if ($request->get("consent_simple") != null) {
+            return $this->createSimpleConsentForm();
+        } else if ($request->get("consent_detailed") != null) {
+            return $this->createDetailedConsentForm();
+        }
+
+        return null;
     }
 }

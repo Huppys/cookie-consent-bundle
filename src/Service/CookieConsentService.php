@@ -15,6 +15,11 @@ class CookieConsentService
     {
     }
 
+    /**
+     * @param Request $request
+     * @return ResponseHeaderBag
+     * @throws InvalidArgumentException
+     */
     public function rejectAllCookies(Request $request): ResponseHeaderBag
     {
         // get CookieBundle config to gain consent cookie configuration
@@ -31,7 +36,7 @@ class CookieConsentService
         $this->saveConsentSettingsToSession($request, false);
 
         // save "no-consent" to db
-        $this->persistConsentSettings();
+        $this->persistConsentSettings(false);
 
         $headerBag = new ResponseHeaderBag();
         $headerBag->setCookie($consentCookie);
@@ -39,26 +44,36 @@ class CookieConsentService
         return $headerBag;
     }
 
+    /**
+     * @param mixed $getData
+     * @param Request $request
+     * @return ResponseHeaderBag
+     * @throws InvalidArgumentException
+     */
     public function acceptAllCookies(mixed $getData, Request $request): ResponseHeaderBag
     {
         // get CookieBundle config to gain consent cookie configuration
         $cookiesConfiguration = $this->cookieSettings['cookies'];
 
-        // always set value to false as the user didn't give the consent to use more cookies than necessary but we use the 'consent' cookie to hide the UI
-        $consentCookie = CookieConfigMapper::mapToCookie($consentCookieConfiguration, 'false', $this->cookieSettings['name_prefix']);
+        $headerBag = new ResponseHeaderBag();
 
-        if ($consentCookie == null) {
-            throw new InvalidArgumentException("Cookie configuration can't be mapped to a Cookie");
+        foreach ($cookiesConfiguration as $configuration) {
+
+            // always set value to true as the user gave the consent to cookies
+            $consentCookie = CookieConfigMapper::mapToCookie($configuration, 'true', $this->cookieSettings['name_prefix']);
+
+            if ($consentCookie == null) {
+                throw new InvalidArgumentException("Cookie configuration can't be mapped to a Cookie");
+            }
+
+            $headerBag->setCookie($consentCookie);
         }
 
         // save "no-consent" to session
-        $this->saveConsentSettingsToSession($request, $getData);
+        $this->saveConsentSettingsToSession($request, $headerBag->getCookies());
 
         // save "no-consent" to db
-        $this->persistConsentSettings();
-
-        $headerBag = new ResponseHeaderBag();
-        $headerBag->setCookie($consentCookie);
+        $this->persistConsentSettings($headerBag->getCookies());
 
         return $headerBag;
     }
@@ -68,7 +83,7 @@ class CookieConsentService
 
     }
 
-    private function persistConsentSettings(): void
+    private function persistConsentSettings(mixed $data): void
     {
         if ($this->persistConsent) {
             // TODO: implement method
@@ -78,13 +93,14 @@ class CookieConsentService
 
             // persist consent log object
         }
-    }
+}
 
-    private function saveConsentSettingsToSession(Request $request, mixed $value): void
-    {
-        $session = $request->getSession();
+private
+function saveConsentSettingsToSession(Request $request, mixed $value): void
+{
+    $session = $request->getSession();
 
-        // save consent settings in session
-        $session->set('consent-settings', $value);
-    }
+    // save consent settings in session
+    $session->set('consent-settings', $value);
+}
 }
