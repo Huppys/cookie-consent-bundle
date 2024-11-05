@@ -5,14 +5,16 @@ declare(strict_types=1);
 
 namespace huppys\CookieConsentBundle\Twig;
 
-use huppys\CookieConsentBundle\Cookie\CookieChecker;
+use huppys\CookieConsentBundle\Service\CookieConsentService;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class CookieConsentTwigExtension extends AbstractExtension
 {
-    public function __construct()
+    public function __construct(
+        private readonly CookieConsentService $cookieConsentService,
+        private readonly RequestStack         $requestStack)
     {
     }
 
@@ -40,25 +42,14 @@ class CookieConsentTwigExtension extends AbstractExtension
      */
     public function isCookieConsentOptionSetByUser(array $context): bool
     {
-        $cookieChecker = $this->getCookieChecker($context['app']->getRequest());
-
-        return $cookieChecker->isCookieConsentOptionSetByUser();
+        return $this->cookieConsentService->isCookieConsentOptionSetByUser($this->requestStack->getCurrentRequest());
     }
 
     /**
      * Checks if user has given permission for cookie category.
      */
-    public function isCategoryAllowedByUser(array $context, string $category): bool
+    public function isCategoryAllowedByUser(string $category, array $context): bool
     {
-        $cookieChecker = $this->getCookieChecker($context['app']->getRequest());
-
-        return $cookieChecker->isCategoryAllowedByUser($category);
-    }
-    /**
-     * Get instance of CookieChecker.
-     */
-    private function getCookieChecker(RequestStack $request): CookieChecker
-    {
-        return new CookieChecker($request);
+        return $this->cookieConsentService->isCategoryAllowedByUser($category, $this->requestStack->getCurrentRequest());
     }
 }

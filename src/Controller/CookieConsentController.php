@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace huppys\CookieConsentBundle\Controller;
 
 use Exception;
-use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
@@ -33,7 +32,6 @@ class CookieConsentController
     public function __construct(
         private readonly Environment          $twigEnvironment,
         private readonly FormFactoryInterface $formFactory,
-        private readonly CookieChecker        $cookieChecker,
         private readonly RouterInterface      $router,
         private readonly LocaleAwareInterface $translator,
         private readonly string|null          $formAction,
@@ -52,9 +50,7 @@ class CookieConsentController
     #[Route('/cookie-consent/view', name: 'cookie_consent.view')]
     public function view(): Response
     {
-        $request = $this->requestStack->getCurrentRequest();
-
-        $this->setLocale($request);
+        $this->setLocale($this->getCurrentRequest());
 
         try {
             $response = new Response(
@@ -79,7 +75,7 @@ class CookieConsentController
     #[Route('/cookie-consent/update', name: 'cookie-consent.update')]
     public function update(): Response
     {
-        $request = $this->requestStack->getCurrentRequest();
+        $request = $this->getCurrentRequest();
 
         if ($request->getMethod() != Request::METHOD_POST) {
             throw new MethodNotAllowedException([Request::METHOD_POST]);
@@ -164,11 +160,11 @@ class CookieConsentController
     /**
      * Show cookie consent.
      */
-    #[Route('/cookie-consent/show-if-not-set', name: 'cookie_consent.show_if_cookie_consent_not_set')]
-    public function showIfCookieConsentNotSet(Request $request): Response
+    #[Route('/cookie-consent/view-if-not-set', name: 'cookie_consent.show_if_cookie_consent_not_set')]
+    public function showIfCookieConsentNotSet(): Response
     {
-        if ($this->cookieChecker->isCookieConsentOptionSetByUser() === false) {
-            return $this->view($request);
+        if ($this->cookieConsentService->isCookieConsentOptionSetByUser($this->getCurrentRequest()) === false) {
+            return $this->view();
         }
 
         return new Response();
@@ -179,7 +175,7 @@ class CookieConsentController
      */
     private function setLocale(Request $request): void
     {
-        $locale = $request->get('locale');
+        $locale = $request->getLocale();
         if (empty($locale) === false) {
             $this->translator->setLocale($locale);
             $request->setLocale($locale);
@@ -195,5 +191,13 @@ class CookieConsentController
         }
 
         return null;
+    }
+
+    /**
+     * @return Request|null
+     */
+    public function getCurrentRequest(): ?Request
+    {
+        return $this->requestStack->getCurrentRequest();
     }
 }

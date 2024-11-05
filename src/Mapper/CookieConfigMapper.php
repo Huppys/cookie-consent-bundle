@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 
 class CookieConfigMapper
 {
-    public static function mapToCookie(mixed $cookieConfiguration, string $value, string $cookieNamePrefix): ?Cookie
+    public static function mapToCookie(mixed $cookieConfiguration, string $value): ?Cookie
     {
         if (!isset($value)) {
             return null;
@@ -46,7 +46,7 @@ class CookieConfigMapper
             return null;
         }
 
-        return new Cookie(name: $cookieNamePrefix . $name, expire: self::convertExpireToDate($expires), domain: $domain, value: $value, secure: $secure, httpOnly: $http_only, raw: false, sameSite: $same_site, partitioned: false);
+        return new Cookie(name: $name, expire: self::convertExpireToDate($expires), domain: $domain, value: $value, secure: $secure, httpOnly: $http_only, raw: false, sameSite: $same_site, partitioned: false);
     }
 
     public static function convertExpireToDate(string $maxAge): \DateTimeInterface

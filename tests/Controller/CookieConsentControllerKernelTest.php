@@ -79,6 +79,5 @@ class CookieConsentControllerKernelTest extends WebTestCase
     {
         $this->assertResponseIsSuccessful();
         $this->assertResponseHasCookie(CookieName::COOKIE_CONSENT_NAME);
-        $this->assertResponseHasCookie(CookieName::COOKIE_CONSENT_KEY_NAME);
     }
 }

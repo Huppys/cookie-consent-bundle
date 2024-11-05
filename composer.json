@@ -24,7 +24,7 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^v3.38.2",
-    "phpunit/phpunit": "^10.4.2 || ^11.1.2",
+    "phpunit/phpunit": "^11.4.3",
     "symfony/maker-bundle": "^1.61",
     "symfony/runtime": "^7.1",
     "symfony/test-pack": "^1.0",

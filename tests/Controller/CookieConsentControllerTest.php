@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace huppys\CookieConsentBundle\tests\Controller;
 
 use huppys\CookieConsentBundle\Controller\CookieConsentController;
-use huppys\CookieConsentBundle\Cookie\CookieChecker;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
 use huppys\CookieConsentBundle\Service\CookieConsentService;
@@ -26,35 +25,41 @@ use Twig\Environment;
 class CookieConsentControllerTest extends TestCase
 {
     private MockObject $templating;
-
     private MockObject $formFactory;
-
-    private MockObject $cookieChecker;
-
     private MockObject $translator;
-
-    private MockObject $router;
-
     private MockObject $cookieConsentService;
+    private MockObject $requestStack;
+    private MockObject $logger;
+    private Request $request;
 
     private CookieConsentController $cookieConsentController;
+    private $locale = 'en';
 
+    /**
+     * @throws Exception
+     */
     public function setUp(): void
     {
         $this->templating = $this->createMock(Environment::class);
         $this->formFactory = $this->createMock(FormFactoryInterface::class);
-        $this->cookieChecker = $this->createMock(CookieChecker::class);
         $this->translator = $this->createMock(Translator::class);
-        $this->router = $this->createMock(RouterInterface::class);
+        $router = $this->createMock(RouterInterface::class);
         $this->cookieConsentService = $this->createMock(CookieConsentService::class);
         $this->requestStack = $this->createMock(RequestStack::class);
         $this->logger = $this->createMock(Logger::class);
 
+        $this->request = new Request();
+        $this->request->setLocale($this->locale);
+
+        $this->requestStack
+            ->expects($this->any())
+            ->method('getCurrentRequest')
+            ->willReturn($this->request);
+
         $this->cookieConsentController = new CookieConsentController(
             $this->templating,
             $this->formFactory,
-            $this->cookieChecker,
-            $this->router,
+            $router,
             $this->translator,
             null,
             null,
@@ -75,11 +80,14 @@ class CookieConsentControllerTest extends TestCase
 
         $this->givenTemplateRendersTest();
 
-        $response = $this->cookieConsentController->view();
+        $response = $this->cookieConsentController->view($this->request);
 
         $this->assertInstanceOf(Response::class, $response);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Test]
     public function shouldShowConsentFormIfCookieNotSet(): void
     {
@@ -87,7 +95,7 @@ class CookieConsentControllerTest extends TestCase
 
         $this->givenCookieConsentNotSetByUser();
 
-        $response = $this->cookieConsentController->showIfCookieConsentNotSet(new Request());
+        $response = $this->cookieConsentController->showIfCookieConsentNotSet();
 
         $this->assertInstanceOf(Response::class, $response);
     }
@@ -99,26 +107,12 @@ class CookieConsentControllerTest extends TestCase
 
         $this->givenTemplateRendersTest();
 
-        $request = $this->createMock(Request::class);
-        $locale = 'en';
-
-        $request
-            ->expects($this->once())
-            ->method('get')
-            ->with('locale')
-            ->willReturn($locale);
-
         $this->translator
             ->expects($this->once())
             ->method('setLocale')
-            ->with($locale);
+            ->with($this->locale);
 
-        $request
-            ->expects($this->once())
-            ->method('setLocale')
-            ->with($locale);
-
-        $response = $this->cookieConsentController->showIfCookieConsentNotSet($request);
+        $response = $this->cookieConsentController->showIfCookieConsentNotSet();
 
         $this->assertInstanceOf(Response::class, $response);
     }
@@ -137,24 +131,26 @@ class CookieConsentControllerTest extends TestCase
             ->expects($this->never())
             ->method('render');
 
-        $response = $this->cookieConsentController->showIfCookieConsentNotSet(new Request());
+        $response = $this->cookieConsentController->showIfCookieConsentNotSet();
 
         $this->assertInstanceOf(Response::class, $response);
     }
 
     private function givenCookieConsentSetByUser(): void
     {
-        $this->cookieChecker
-            ->expects($this->once())
+        $this->cookieConsentService
+            ->expects($this->any())
             ->method('isCookieConsentOptionSetByUser')
+            ->with($this->request)
             ->willReturn(true);
     }
 
     private function givenCookieConsentNotSetByUser(): void
     {
-        $this->cookieChecker
-            ->expects($this->once())
+        $this->cookieConsentService
+            ->expects($this->any())
             ->method('isCookieConsentOptionSetByUser')
+            ->with($this->request)
             ->willReturn(false);
     }
 

@@ -32,8 +32,6 @@ class AppKernel extends Kernel
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-//        $container->setParameter('kernel.project_dir', __DIR__);
-
         $container->setParameter('kernel.secret', 'thisIsASecret');
 
         $container->loadFromExtension('framework', [
@@ -74,10 +72,6 @@ class AppKernel extends Kernel
         ]);
 
         $container->loadFromExtension('cookie_consent', [
-            'cookie_settings' => [
-            ],
-            'consent_categories' => ['social_media', 'analytics', 'marketing'],
-            'position' => 'top',
         ]);
     }
 }

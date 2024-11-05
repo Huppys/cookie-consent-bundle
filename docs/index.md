@@ -63,32 +63,20 @@ By default, the most secure options are enabled. You can change the config in `c
 
 ```yaml
 cookie_consent:
-  cookie_settings:
-    name_prefix: '' # string, any string you like to prefix the cookie names with
-    cookies:
-      consent_cookie:
-        expires: 'P180D' # available values: PHP formatted date string, 'P180D' (180 days), 'P1Y' (1 year) etc.
-        domain: null # optional: string or null, domain name, e.g. 'example.com'; null means 'use the current domain'
-        secure: true # boolean, true by deafult, enable or disable transport only over https
-        http_only: true # boolean, refer to mdn docs for more info
-        same_site: 'lax' # available values: 'strict', 'lax', 'none'; if value is 'none' the 'secure' flag will be set to true by default
-      consent_key_cookie:
-        expires: 'P180D'
-        domain: null
-        secure: true
-        http_only: true
-        same_site: 'lax'
-      consent_categories_cookie:
-        expires: 'P180D'
-        domain: null
-        secure: true
-        http_only: true
-        same_site: 'lax'
-  consent_categories: # Below are the default supported categories
-    - 'analytics'
-    - 'tracking'
-    - 'marketing'
-    - 'social_media'
+  consent_configuration:
+    consent_cookie:
+      expires: 'P180D' # available values: PHP formatted date string, 'P180D' (180 days), 'P1Y' (1 year) etc.
+      domain: null # optional: string or null, domain name, e.g. 'example.com'; null means 'use the current domain'
+      secure: true # boolean, true by deafult, enable or disable transport only over https
+      http_only: true # boolean, refer to mdn docs for more info
+      same_site: 'lax' # available values: 'strict', 'lax', 'none'; if value is 'none' the 'secure' flag will be set to true by default
+    consent_categories:
+      functional:
+        - bookmark
+        - shopping_cart
+      social_media:
+        - twitter
+      marketing:
   persist_consent: true # boolean; logs user actions to database
   position: 'dialog' # available values: 'bottom', 'dialog'
   form_action: $routeName # When set, xhr-Requests will only be sent to this route. Take care of having the route available.

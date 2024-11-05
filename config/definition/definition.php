@@ -3,11 +3,10 @@
 declare(strict_types=1);
 
 use huppys\CookieConsentBundle\Enum\ConsentBannerPosition;
-use huppys\CookieConsentBundle\Enum\CookieCategory;
+use huppys\CookieConsentBundle\Enum\CookieName;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 
 require_once __DIR__ . '/utils/cookie.php';
-require_once __DIR__ . '/utils/cookie-settings.php';
 
 
 return static function (DefinitionConfigurator $definition) {
@@ -15,10 +14,17 @@ return static function (DefinitionConfigurator $definition) {
     $definition
         ->rootNode()
             ->children()
-                ->append(addCookieSettingsNode())
-                ->variableNode('consent_categories')
-                    ->defaultValue([CookieCategory::ANALYTICS, CookieCategory::TRACKING, CookieCategory::MARKETING, CookieCategory::SOCIAL_MEDIA])
-                    ->info('Set the categories of consent that should be used')
+                ->arrayNode('consent_configuration')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->append(consentCookie('consent_cookie', CookieName::COOKIE_CONSENT_NAME))
+                        ->arrayNode('consent_categories')
+                            ->arrayPrototype() // freely define your category name like 'functional' or 'social_media'
+                                ->scalarPrototype() // freely define the cookie's key like 'twitter' or 'hotjar' to define it's
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
                 ->end()
                 ->enumNode('position')
                     ->defaultValue(ConsentBannerPosition::POSITION_DIALOG)

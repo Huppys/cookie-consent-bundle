@@ -37,7 +37,22 @@ class CookieConsentConfigDefinitonTest extends TestCase
     {
         $processedConfig = $this->processor->processConfiguration($this->configuration, [$this->getFullConfig()]);
 
-        $this->assertEquals(['tracking', 'marketing', 'social_media'], $processedConfig['consent_categories']);
+        $consentCategories = $processedConfig['consent_configuration']['consent_categories'];
+
+        $this->assertArrayHasKey('functional', $consentCategories);
+        $this->assertArrayHasKey('social_media', $consentCategories);
+        $this->assertArrayHasKey('marketing', $consentCategories);
+
+        $categoryFunction = $consentCategories['functional'];
+        $this->assertContains('bookmark', $categoryFunction);
+        $this->assertContains('shopping_cart', $categoryFunction);
+
+        $this->assertContains('twitter', $consentCategories['social_media']);
+
+        $categoryMarketing = $consentCategories['marketing'];
+        $this->assertIsArray($categoryMarketing);
+        $this->assertCount(0, $categoryMarketing);
+
         $this->assertEquals('top', $processedConfig['position']);
     }
 
@@ -45,13 +60,6 @@ class CookieConsentConfigDefinitonTest extends TestCase
     {
         $this->expectException(InvalidConfigurationException::class);
         $this->processor->processConfiguration($this->configuration, [$this->getInvalidConfig()]);
-    }
-
-    public function testCookieNamesContainPrefix(): void
-    {
-        $processedConfig = $this->processor->processConfiguration($this->configuration, [$this->getFullConfig()]);
-
-        $this->assertEquals('test_', $processedConfig['cookie_settings']['name_prefix']);
     }
 
     public function testCookieSettingsIsAnArray(): void
@@ -66,25 +74,20 @@ class CookieConsentConfigDefinitonTest extends TestCase
     protected function getFullConfig(): array
     {
         $yaml = <<<EOF
-consent_categories:
-- 'tracking'
-- 'marketing'
-- 'social_media'
-cookie_settings:
-    name_prefix: 'test_'
-    cookies:
-        consent_cookie:
-            name: 'consent'
-            http_only: false
-            secure: true
-            same_site: 'strict'
-            expires: 'P180D'
-        consent_key_cookie:
-            name: 'consent_key'
-            http_only: true
-            secure: true
-            same_site: 'strict'
-            expires: 'P180D'
+consent_configuration:
+    consent_cookie:
+        name: 'consent'
+        http_only: false
+        secure: true
+        same_site: 'strict'
+        expires: 'P180D'
+    consent_categories:
+        functional:
+            - bookmark
+            - shopping_cart
+        social_media:
+            - twitter
+        marketing:
 position: 'top'
 csrf_protection: true
 EOF;
