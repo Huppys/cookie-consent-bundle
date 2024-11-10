@@ -3,17 +3,20 @@
 namespace huppys\CookieConsentBundle\tests\Form;
 
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
-use huppys\CookieConsentBundle\Form\ConsentCategory;
 use huppys\CookieConsentBundle\Form\ConsentCategoryType;
-use huppys\CookieConsentBundle\Form\ConsentCookieType;
-use huppys\CookieConsentBundle\Form\ConsentDetailedConfiguration;
+use huppys\CookieConsentBundle\Form\ConsentCategoryTypeModel;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
-use huppys\CookieConsentBundle\Form\ConsentDetailsType;
+use huppys\CookieConsentBundle\Form\ConsentDetailedTypeModel;
+use huppys\CookieConsentBundle\Form\ConsentSimpleType;
+use huppys\CookieConsentBundle\Form\ConsentVendorType;
+use huppys\CookieConsentBundle\Form\ConsentVendorTypeModel;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\Exception;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\Yaml\Parser;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConsentDetailedTypeTest extends TypeTestCase
@@ -22,25 +25,23 @@ class ConsentDetailedTypeTest extends TypeTestCase
     #[DataProvider('submittedFormProvider')]
     public function shouldHaveClickedButton($formData, $expectedClickedButton): void
     {
-        $formModel = new ConsentDetailedConfiguration();
-
-        $formModel->setDescription($formData['description']);
+        $formModel = new ConsentDetailedTypeModel();
 
         foreach ($formData['categories'] as $category) {
 
-            $consentCategory = new ConsentCategory();
+            $consentCategory = new ConsentCategoryTypeModel();
             $consentCategory->setName($category['name']);
-            $consentCategory->setUserConsent($category['userConsent']);
+            $consentCategory->setConsentGiven($category['userConsent']);
 
-            foreach ($category['cookies'] as $cookie) {
-                $consentCookie = new ConsentDetailsType();
+            foreach ($category['vendors'] as $vendor) {
+                $consentCookie = new ConsentVendorTypeModel();
 
                 // explicitly set fields from formData
-                $consentCookie->setName($cookie['name']);
-                $consentCookie->setConsentGiven($cookie['consentGiven']);
-                $consentCookie->setDescriptionKey($cookie['descriptionKey']);
+                $consentCookie->setName($vendor['name']);
+                $consentCookie->setConsentGiven($vendor['consentGiven']);
+                $consentCookie->setDescriptionKey($vendor['descriptionKey']);
 
-                $consentCategory->getCookies()->add($consentCookie);
+                $consentCategory->getVendors()->add($consentCookie);
             }
 
             $formModel->getCategories()->add($consentCategory);
@@ -55,6 +56,19 @@ class ConsentDetailedTypeTest extends TypeTestCase
         $this->assertEquals($form->getClickedButton()->getName(), $expectedClickedButton);
     }
 
+
+    #[Test]
+    public function shouldReturnFormWithSubmitButtons(): void
+    {
+        /** @var ConsentSimpleType $form */
+        $form = $this->factory->create(ConsentDetailedType::class);
+
+        $this->assertInstanceOf(FormInterface::class, $form);
+        $this->assertArrayHasKey('accept_all', $form->all());
+        $this->assertArrayHasKey('reject_all', $form->all());
+        $this->assertArrayHasKey('categories', $form->all());
+    }
+
     /**
      * @throws Exception
      */
@@ -64,7 +78,7 @@ class ConsentDetailedTypeTest extends TypeTestCase
 
         $consentDetailedType = new ConsentDetailedType($translatorInterfaceMock);
         $consentCategoryType = new ConsentCategoryType($translatorInterfaceMock);
-        $consentCookieType = new ConsentCookieType($translatorInterfaceMock);
+        $consentCookieType = new ConsentVendorType($translatorInterfaceMock);
 
         return [
             new PreloadedExtension([$consentDetailedType, $consentCategoryType, $consentCookieType], []),
@@ -77,12 +91,11 @@ class ConsentDetailedTypeTest extends TypeTestCase
             'dataset:save_consent_settings_clicked' => [
                 [
                     FormSubmitName::SAVE_CONSENT_SETTINGS => true,
-                    'description' => 'test_detailed_type',
                     'categories' => [
                         [
                             'name' => 'analytics',
                             'userConsent' => false,
-                            'cookies' => [
+                            'vendors' => [
                                 [
                                     'name' => 'googleanalytics',
                                     'consentGiven' => false,
@@ -93,7 +106,7 @@ class ConsentDetailedTypeTest extends TypeTestCase
                         [
                             'name' => 'tracking',
                             'userConsent' => true,
-                            'cookies' => [
+                            'vendors' => [
                                 [
                                     'name' => 'googletagmanager',
                                     'consentGiven' => true,
@@ -104,7 +117,7 @@ class ConsentDetailedTypeTest extends TypeTestCase
                         [
                             'name' => 'social_media',
                             'userConsent' => false,
-                            'cookies' => [
+                            'vendors' => [
                                 [
                                     'name' => 'meta',
                                     'consentGiven' => false,
@@ -125,10 +138,40 @@ class ConsentDetailedTypeTest extends TypeTestCase
             'dataset:accept_all_clicked' => [
                 [
                     FormSubmitName::ACCEPT_ALL => true,
-                    'description' => 'test_detailed_type',
                 ],
                 FormSubmitName::ACCEPT_ALL,
             ],
+            'dataset:reject_all_clicked' => [
+                [
+                    FormSubmitName::REJECT_ALL => true,
+                ],
+                FormSubmitName::REJECT_ALL,
+            ],
         ];
+    }
+
+    private function bundleConfiguration(): array
+    {
+        $yaml = <<<EOF
+consent_configuration:
+    consent_cookie:
+        name: 'consent'
+        http_only: false
+        secure: true
+        same_site: 'strict'
+        expires: 'P180D'
+    consent_categories:
+        functional:
+            - bookmark
+            - shopping_cart
+        social_media:
+            - twitter
+        marketing:
+position: 'top'
+csrf_protection: true
+EOF;
+        $parser = new Parser();
+
+        return $parser->parse($yaml);
     }
 }

@@ -3,6 +3,9 @@
 namespace huppys\CookieConsentBundle\Service;
 
 use huppys\CookieConsentBundle\Enum\CookieName;
+use huppys\CookieConsentBundle\Form\ConsentCategoryTypeModel;
+use huppys\CookieConsentBundle\Form\ConsentDetailedTypeModel;
+use huppys\CookieConsentBundle\Form\ConsentVendorTypeModel;
 use huppys\CookieConsentBundle\Mapper\CookieConfigMapper;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
@@ -112,5 +115,34 @@ class CookieConsentService
     public function saveConsentSettings(mixed $getData, Request $request)
     {
 
+    }
+
+    public function createDetailedForm(): ConsentDetailedTypeModel
+    {
+        $consentConfig = $this->consentConfiguration;
+
+        $formModel = new ConsentDetailedTypeModel();
+
+        foreach ($consentConfig['consent_categories'] as $categoryKey => $category) {
+
+            $consentCategory = new ConsentCategoryTypeModel();
+            $consentCategory->setName($categoryKey);
+            $consentCategory->setConsentGiven(false);
+
+            foreach ($category as $vendorKey => $vendor) {
+                $consentCookie = new ConsentVendorTypeModel();
+
+                // explicitly set fields from formData
+                $consentCookie->setName($vendor);
+                $consentCookie->setConsentGiven(false);
+                $consentCookie->setDescriptionKey($vendor);
+
+                $consentCategory->getVendors()->add($consentCookie);
+            }
+
+            $formModel->getCategories()->add($consentCategory);
+        }
+
+        return $formModel;
     }
 }

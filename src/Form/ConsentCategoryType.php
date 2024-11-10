@@ -27,10 +27,10 @@ class ConsentCategoryType extends AbstractType
 //        $categoryDescription = $this->translate('cookie_consent.' . $category . '.description');
 
         $builder->add('name', HiddenType::class);
-        $builder->add('cookies', CollectionType::class, [
-            'entry_type' => ConsentCookieType::class
+        $builder->add('vendors', CollectionType::class, [
+            'entry_type' => ConsentVendorType::class
         ]);
-        $builder->add('userConsent', CheckboxType::class, [
+        $builder->add('consentGiven', CheckboxType::class, [
             'required' => true,
         ]);
     }
@@ -41,7 +41,7 @@ class ConsentCategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ConsentCategory::class,
+            'data_class' => ConsentCategoryTypeModel::class,
             'translation_domain' => 'CookieConsentBundle',
         ]);
     }

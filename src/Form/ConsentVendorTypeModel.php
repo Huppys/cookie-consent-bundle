@@ -2,7 +2,7 @@
 
 namespace huppys\CookieConsentBundle\Form;
 
-class ConsentDetailsType
+class ConsentVendorTypeModel
 {
     private string $name;
     private bool $consentGiven;

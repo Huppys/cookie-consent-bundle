@@ -4,7 +4,7 @@ namespace huppys\CookieConsentBundle\Form;
 
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
 
-class ConsentSimpleConfiguration
+class ConsentSimpleTypeModel
 {
     private bool $rejectAll;
     private bool $acceptAll;

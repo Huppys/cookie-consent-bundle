@@ -3,11 +3,12 @@
 namespace huppys\CookieConsentBundle\tests\Form;
 
 use huppys\CookieConsentBundle\Enum\FormSubmitName;
-use huppys\CookieConsentBundle\Form\ConsentSimpleConfiguration;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
+use huppys\CookieConsentBundle\Form\ConsentSimpleTypeModel;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\Exception;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -20,7 +21,7 @@ class ConsentSimpleTypeTest extends TypeTestCase
     #[DataProvider('submittedFormProvider')]
     public function shouldHaveClickedButton($formData, $expectedClickedButton): void
     {
-        $model = new ConsentSimpleConfiguration($formData);
+        $model = new ConsentSimpleTypeModel($formData);
 
         $form = $this->factory->create(ConsentSimpleType::class, $model);
 
@@ -29,6 +30,17 @@ class ConsentSimpleTypeTest extends TypeTestCase
         $this->assertEquals($form->getClickedButton()->getName(), $expectedClickedButton);
 
         $this->assertTrue($form->isSynchronized());
+    }
+
+    #[Test]
+    public function shouldReturnFormWithSubmitButtons(): void
+    {
+        /** @var ConsentSimpleType $form */
+        $form = $this->factory->create(ConsentSimpleType::class);
+
+        $this->assertInstanceOf(FormInterface::class, $form);
+        $this->assertArrayHasKey('accept_all', $form->all());
+        $this->assertArrayHasKey('reject_all', $form->all());
     }
 
     /**

@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class ConsentCookieType extends AbstractType
+class ConsentVendorType extends AbstractType
 {
 
     public function __construct(
@@ -26,9 +26,6 @@ class ConsentCookieType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-//        $categoryTitle = $this->translate('cookie_consent.' . $category . '.title');
-        $categoryDescription = $this->translate('cookie_consent.' . 'category_name' . '.description');
-
         $builder->add('consentGiven', CheckboxType::class);
 
         $builder->add('name', HiddenType::class);
@@ -40,7 +37,7 @@ class ConsentCookieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => ConsentDetailsType::class,
+                                   'data_class' => ConsentVendorTypeModel::class,
                                    'translation_domain' => 'CookieConsentBundle'
                                ]);
     }

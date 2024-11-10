@@ -5,9 +5,8 @@ namespace huppys\CookieConsentBundle\Form;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class ConsentDetailedConfiguration
+class ConsentDetailedTypeModel
 {
-    protected string $description;
     protected Collection $categories;
 
 
@@ -19,16 +18,6 @@ class ConsentDetailedConfiguration
     public function getCategories(): Collection
     {
         return $this->categories;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
     }
 
     public function setCategories(Collection $categories): void

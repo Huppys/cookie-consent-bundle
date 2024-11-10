@@ -72,6 +72,18 @@ class AppKernel extends Kernel
         ]);
 
         $container->loadFromExtension('cookie_consent', [
+            'consent_configuration' => [
+                'consent_categories' => [
+                    'functional' => [
+                        'bookmark',
+                        'shopping_cart'
+                    ],
+                    'social_media' => [
+                        'twitter'
+                    ],
+                    'marketing' => []
+                ]
+            ]
         ]);
     }
 }

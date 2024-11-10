@@ -5,15 +5,15 @@ namespace huppys\CookieConsentBundle\Form;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class ConsentCategory
+class ConsentCategoryTypeModel
 {
     private string $name;
-    private Collection $cookies;
-    private bool $userConsent;
+    private Collection $vendors;
+    private bool $consentGiven;
 
     public function __construct()
     {
-        $this->cookies = new ArrayCollection();
+        $this->vendors = new ArrayCollection();
     }
 
     public function getName(): string
@@ -26,18 +26,18 @@ class ConsentCategory
         $this->name = $name;
     }
 
-    public function getCookies(): Collection
+    public function getVendors(): Collection
     {
-        return $this->cookies;
+        return $this->vendors;
     }
 
-    public function getUserConsent(): bool
+    public function getConsentGiven(): bool
     {
-        return $this->userConsent;
+        return $this->consentGiven;
     }
 
-    public function setUserConsent(bool $userConsent): void
+    public function setConsentGiven(bool $consentGiven): void
     {
-        $this->userConsent = $userConsent;
+        $this->consentGiven = $consentGiven;
     }
 }

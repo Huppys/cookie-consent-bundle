@@ -148,7 +148,9 @@ class CookieConsentController
 
     private function createDetailedConsentForm(): FormInterface
     {
-        $formBuilder = $this->formFactory->createBuilder(ConsentDetailedType::class);
+        $formModel = $this->cookieConsentService->createDetailedForm();
+
+        $formBuilder = $this->formFactory->createBuilder(ConsentDetailedType::class, $formModel);
 
         if ($this->formAction != null) {
             $formBuilder->setAction($this->router->generate($this->formAction));
