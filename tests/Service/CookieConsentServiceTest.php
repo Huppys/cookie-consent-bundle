@@ -3,6 +3,9 @@
 namespace huppys\CookieConsentBundle\tests\Service;
 
 use huppys\CookieConsentBundle\Enum\CookieName;
+use huppys\CookieConsentBundle\Form\ConsentCategoryTypeModel;
+use huppys\CookieConsentBundle\Form\ConsentDetailedTypeModel;
+use huppys\CookieConsentBundle\Form\ConsentVendorTypeModel;
 use huppys\CookieConsentBundle\Service\CookieConsentService;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -41,6 +44,26 @@ class CookieConsentServiceTest extends TestCase
         $this->assertEquals(CookieName::COOKIE_CONSENT_NAME, $headerBag->getCookies()[0]->getName());
     }
 
+    #[Test]
+    public function shouldCreateDetailedFormModel(): void
+    {
+        $formModel = $this->consentService->createDetailedForm();
+
+        $this->assertInstanceOf(ConsentDetailedTypeModel::class, $formModel);
+
+        $configuredCategories = $this->getConsentCookieConfiguration()['consent_categories'];
+
+        /** @var ConsentCategoryTypeModel $category */
+        foreach ($formModel->getCategories() as $category) {
+            $this->assertArrayHasKey($category->getName(), $configuredCategories);
+
+            /** @var ConsentVendorTypeModel $vendor */
+            foreach ($category->getVendors() as $vendor) {
+                $this->assertContains($vendor->getName(), $configuredCategories[$category->getName()]);
+            }
+        }
+    }
+
     private function getConsentCookieConfiguration()
     {
         return [
@@ -50,6 +73,16 @@ class CookieConsentServiceTest extends TestCase
                 'secure' => true,
                 'same_site' => 'lax',
                 'expires' => 'P180D',
+            ],
+            'consent_categories' => [
+                'functional' => [
+                    'bookmark',
+                    'shopping_cart'
+                ],
+                'social_media' => [
+                    'twitter'
+                ],
+                'marketing' => []
             ]
         ];
     }
