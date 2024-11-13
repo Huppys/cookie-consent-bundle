@@ -9,6 +9,7 @@ use huppys\CookieConsentBundle\Enum\FormSubmitName;
 use huppys\CookieConsentBundle\Form\ConsentDetailedType;
 use huppys\CookieConsentBundle\Form\ConsentSimpleType;
 use huppys\CookieConsentBundle\Service\CookieConsentService;
+use huppys\CookieConsentBundle\Ui\ConsentFormDto;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -52,15 +53,15 @@ class CookieConsentController
     {
         $this->setLocale($this->getCurrentRequest());
 
+        $consentFormDto = new ConsentFormDto(
+            $this->createSimpleConsentForm()->createView(),
+            $this->createDetailedConsentForm()->createView(),
+            $this->position,
+            $this->readMoreRoute
+        );
+
         try {
-            $response = new Response(
-                $this->twigEnvironment->render('@CookieConsent/cookie_consent.html.twig', [
-                    'simple_form' => $this->createSimpleConsentForm()->createView(),
-                    'detailed_form' => $this->createDetailedConsentForm()->createView(),
-                    'position' => $this->position,
-                    'read_more_route' => $this->readMoreRoute,
-                ])
-            );
+            $response = new Response($this->twigEnvironment->render('@CookieConsent/cookie_consent.html.twig', $consentFormDto->toArray()));
 
             // Cache in ESI should not be shared
             $response->setPrivate();
