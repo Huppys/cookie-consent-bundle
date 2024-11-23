@@ -33,6 +33,7 @@
       - [ ] post-form section
     - [ ] Footer
       - has to be generic to whatever content to user needs
+  - [ ] Map request data to typed objects ==> https://symfony.com/blog/new-in-symfony-6-3-mapping-request-data-to-typed-objects
 - Security
   - Which domain is set when setting cookies? With subdomain?
 - Project setup

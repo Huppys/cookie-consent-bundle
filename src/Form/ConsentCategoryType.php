@@ -5,7 +5,6 @@ namespace huppys\CookieConsentBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -26,12 +25,16 @@ class ConsentCategoryType extends AbstractType
 //        $categoryTitle = $this->translate('cookie_consent.' . $category . '.title');
 //        $categoryDescription = $this->translate('cookie_consent.' . $category . '.description');
 
-        $builder->add('name', HiddenType::class);
-        $builder->add('vendors', CollectionType::class, [
-            'entry_type' => ConsentVendorType::class
-        ]);
         $builder->add('consentGiven', CheckboxType::class, [
-            'required' => true,
+        ]);
+        $builder->add('vendors', CollectionType::class, [
+            'entry_type' => ConsentVendorType::class,
+            'entry_options' => [
+                'attr' => ['class' => 'consent-form-category-vendor'],
+            ],
+            'attr' => [
+                'class' => 'consent-form-vendors'
+            ]
         ]);
     }
 

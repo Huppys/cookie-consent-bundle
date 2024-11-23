@@ -5,6 +5,7 @@ namespace huppys\CookieConsentBundle\tests\Fixtures\App;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use huppys\CookieConsentBundle\CookieConsentBundle;
+use huppys\CookieConsentBundle\tests\Fixtures\Configuration\ConsentBundleConfiguration;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\MakerBundle\MakerBundle;
@@ -71,19 +72,6 @@ class AppKernel extends Kernel
             'root_namespace' => "huppys\\CookieConsentBundle"
         ]);
 
-        $container->loadFromExtension('cookie_consent', [
-            'consent_configuration' => [
-                'consent_categories' => [
-                    'functional' => [
-                        'bookmark',
-                        'shopping_cart'
-                    ],
-                    'social_media' => [
-                        'twitter'
-                    ],
-                    'marketing' => []
-                ]
-            ]
-        ]);
+        $container->loadFromExtension('cookie_consent', ConsentBundleConfiguration::kernelTestCaseConfiguration());
     }
 }

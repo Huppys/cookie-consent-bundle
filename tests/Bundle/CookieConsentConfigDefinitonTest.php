@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace huppys\CookieConsentBundle\tests\Bundle;
 
 use huppys\CookieConsentBundle\CookieConsentBundle;
+use huppys\CookieConsentBundle\tests\Fixtures\Configuration\ConsentBundleConfiguration;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Configuration;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -53,7 +54,7 @@ class CookieConsentConfigDefinitonTest extends TestCase
         $this->assertIsArray($categoryMarketing);
         $this->assertCount(0, $categoryMarketing);
 
-        $this->assertEquals('top', $processedConfig['position']);
+        $this->assertEquals('dialog', $processedConfig['position']);
     }
 
     public function testInvalidConfiguration(): void
@@ -73,27 +74,7 @@ class CookieConsentConfigDefinitonTest extends TestCase
      */
     protected function getFullConfig(): array
     {
-        $yaml = <<<EOF
-consent_configuration:
-    consent_cookie:
-        name: 'consent'
-        http_only: false
-        secure: true
-        same_site: 'strict'
-        expires: 'P180D'
-    consent_categories:
-        functional:
-            - bookmark
-            - shopping_cart
-        social_media:
-            - twitter
-        marketing:
-position: 'top'
-csrf_protection: true
-EOF;
-        $parser = new Parser();
-
-        return $parser->parse($yaml);
+        return ConsentBundleConfiguration::testCaseConfiguration();
     }
 
     /**

@@ -28,6 +28,12 @@ class ConsentDetailedType extends AbstractType
         // build collection of categories
         $builder->add('categories', CollectionType::class, [
             'entry_type' => ConsentCategoryType::class,
+            'entry_options' => [
+                'attr' => ['class' => 'consent-form-category'],
+            ],
+            'attr' => [
+                'class' => 'consent-form-categories'
+            ]
         ]);
 
         // add submit buttons

@@ -16,7 +16,6 @@ use PHPUnit\Framework\MockObject\Exception;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
-use Symfony\Component\Yaml\Parser;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConsentDetailedTypeTest extends TypeTestCase
@@ -148,30 +147,5 @@ class ConsentDetailedTypeTest extends TypeTestCase
                 FormSubmitName::REJECT_ALL,
             ],
         ];
-    }
-
-    private function bundleConfiguration(): array
-    {
-        $yaml = <<<EOF
-consent_configuration:
-    consent_cookie:
-        name: 'consent'
-        http_only: false
-        secure: true
-        same_site: 'strict'
-        expires: 'P180D'
-    consent_categories:
-        functional:
-            - bookmark
-            - shopping_cart
-        social_media:
-            - twitter
-        marketing:
-position: 'top'
-csrf_protection: true
-EOF;
-        $parser = new Parser();
-
-        return $parser->parse($yaml);
     }
 }

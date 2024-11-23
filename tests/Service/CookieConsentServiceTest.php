@@ -7,6 +7,7 @@ use huppys\CookieConsentBundle\Form\ConsentCategoryTypeModel;
 use huppys\CookieConsentBundle\Form\ConsentDetailedTypeModel;
 use huppys\CookieConsentBundle\Form\ConsentVendorTypeModel;
 use huppys\CookieConsentBundle\Service\CookieConsentService;
+use huppys\CookieConsentBundle\tests\Fixtures\Configuration\ConsentBundleConfiguration;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +46,7 @@ class CookieConsentServiceTest extends TestCase
     }
 
     #[Test]
-    public function shouldCreateDetailedFormModel(): void
+    public function shouldCreateDetailedFormModelFromConfiguration(): void
     {
         $formModel = $this->consentService->createDetailedForm();
 
@@ -66,24 +67,6 @@ class CookieConsentServiceTest extends TestCase
 
     private function getConsentCookieConfiguration()
     {
-        return [
-            'consent_cookie' => [
-                'name' => 'consent',
-                'http_only' => true,
-                'secure' => true,
-                'same_site' => 'lax',
-                'expires' => 'P180D',
-            ],
-            'consent_categories' => [
-                'functional' => [
-                    'bookmark',
-                    'shopping_cart'
-                ],
-                'social_media' => [
-                    'twitter'
-                ],
-                'marketing' => []
-            ]
-        ];
+        return ConsentBundleConfiguration::testCaseConfiguration()['consent_configuration'];
     }
 }
