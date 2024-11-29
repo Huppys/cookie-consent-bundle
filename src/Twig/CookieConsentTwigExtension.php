@@ -42,7 +42,7 @@ class CookieConsentTwigExtension extends AbstractExtension
      */
     public function isCookieConsentOptionSetByUser(array $context): bool
     {
-        return $this->cookieConsentService->isCookieConsentOptionSetByUser($this->requestStack->getCurrentRequest());
+        return $this->cookieConsentService->isCookieConsentFormSubmittedByUser($this->requestStack->getCurrentRequest());
     }
 
     /**

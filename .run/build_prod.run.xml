@@ -5,7 +5,7 @@
     <scripts>
       <script value="build:prod" />
     </scripts>
-    <node-interpreter value="$PROJECT_DIR$/../../machine/workspaces/default/c24-platform/c24-core/lib/node/node" />
+    <node-interpreter value="$USER_HOME$/.bun/bin/bun" />
     <envs />
     <method v="2" />
   </configuration>

@@ -2,6 +2,7 @@
 
 namespace huppys\CookieConsentBundle\tests\Service;
 
+use huppys\CookieConsentBundle\Enum\ConsentType;
 use huppys\CookieConsentBundle\Enum\CookieName;
 use huppys\CookieConsentBundle\Form\ConsentCategoryTypeModel;
 use huppys\CookieConsentBundle\Form\ConsentDetailedTypeModel;
@@ -30,7 +31,7 @@ class CookieConsentServiceTest extends TestCase
         $headerBag = $this->consentService->rejectAllCookies($request);
 
         $this->assertInstanceOf(ResponseHeaderBag::class, $headerBag);
-        $this->assertEquals('false', $headerBag->getCookies()[0]->getValue());
+        $this->assertEquals(ConsentType::NO_CONSENT, $headerBag->getCookies()[0]->getValue());
         $this->assertEquals(CookieName::COOKIE_CONSENT_NAME, $headerBag->getCookies()[0]->getName());
     }
 
@@ -41,7 +42,7 @@ class CookieConsentServiceTest extends TestCase
         $headerBag = $this->consentService->acceptAllCookies([], $request);
 
         $this->assertInstanceOf(ResponseHeaderBag::class, $headerBag);
-        $this->assertEquals('true', $headerBag->getCookies()[0]->getValue());
+        $this->assertEquals(ConsentType::FULL_CONSENT, $headerBag->getCookies()[0]->getValue());
         $this->assertEquals(CookieName::COOKIE_CONSENT_NAME, $headerBag->getCookies()[0]->getName());
     }
 

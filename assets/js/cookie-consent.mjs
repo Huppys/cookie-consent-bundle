@@ -34,7 +34,7 @@ async function submitSimpleCookieSelection(form, submitter) {
 
 document.addEventListener("DOMContentLoaded", function () {
     const cookieConsent = document.querySelector('.cookie-consent');
-    const cookieConsentForm = document.querySelector('.cookie-consent__form');
+    const consentForms = document.querySelectorAll('.cookie-consent__form');
 
 
     cookieConsent.querySelector('.js-show-settings').addEventListener('click', function (event) {
@@ -58,21 +58,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cookieConsent.querySelector('.js-consent-simple-form').addEventListener('submit', async function (event) {
         event.preventDefault();
-        debugger;
         await submitSimpleCookieSelection(event.target, event.submitter);
     });
 
-    if (cookieConsentForm) {
-        // we got a form
-        const submitButtons = cookieConsentForm.querySelectorAll('.js-submit-cookie-consent-form');
-        const formAction = cookieConsentForm.action || location.href;
+    consentForms.forEach((form) => {
 
-        cookieConsentForm.addEventListener('submit', function (event) {
+        // we got a form
+        const submitButtons = form.querySelectorAll('.js-submit-cookie-consent-form');
+        const formAction = form.action || location.href;
+
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
 
             fetch(formAction, {
                 method: 'POST',
-                body: new FormData(cookieConsentForm, event.submitter)
+                body: new FormData(form, event.submitter)
             }).then(function (res) {
                 if (res.status >= 200 && res.status < 300) {
                     hideCookieConsentForm(cookieConsent, cookieConsentDialog);
@@ -88,11 +88,11 @@ document.addEventListener("DOMContentLoaded", function () {
             // we got a dialog, show it
             cookieConsentDialog.showModal();
         }
-    }
+    });
 });
 
 function dispatchSuccessEvent(submitter) {
-    const formSubmittedEvent = new CustomEvent('cookie-consent-form-submit-successful', {
+    const formSubmittedEvent = new CustomEvent('cookie-consent.form-submit-successful', {
         detail: submitter
     });
     document.dispatchEvent(formSubmittedEvent);

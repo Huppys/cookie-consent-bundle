@@ -95,7 +95,7 @@ class CookieConsentControllerTest extends TestCase
 
         $this->givenCookieConsentNotSetByUser();
 
-        $response = $this->cookieConsentController->showIfCookieConsentNotSet();
+        $response = $this->cookieConsentController->viewIfNoConsent();
 
         $this->assertInstanceOf(Response::class, $response);
     }
@@ -112,7 +112,7 @@ class CookieConsentControllerTest extends TestCase
             ->method('setLocale')
             ->with($this->locale);
 
-        $response = $this->cookieConsentController->showIfCookieConsentNotSet();
+        $response = $this->cookieConsentController->viewIfNoConsent();
 
         $this->assertInstanceOf(Response::class, $response);
     }
@@ -131,7 +131,7 @@ class CookieConsentControllerTest extends TestCase
             ->expects($this->never())
             ->method('render');
 
-        $response = $this->cookieConsentController->showIfCookieConsentNotSet();
+        $response = $this->cookieConsentController->viewIfNoConsent();
 
         $this->assertInstanceOf(Response::class, $response);
     }
@@ -140,7 +140,7 @@ class CookieConsentControllerTest extends TestCase
     {
         $this->cookieConsentService
             ->expects($this->any())
-            ->method('isCookieConsentOptionSetByUser')
+            ->method('isCookieConsentFormSubmittedByUser')
             ->with($this->request)
             ->willReturn(true);
     }
@@ -149,7 +149,7 @@ class CookieConsentControllerTest extends TestCase
     {
         $this->cookieConsentService
             ->expects($this->any())
-            ->method('isCookieConsentOptionSetByUser')
+            ->method('isCookieConsentFormSubmittedByUser')
             ->with($this->request)
             ->willReturn(false);
     }

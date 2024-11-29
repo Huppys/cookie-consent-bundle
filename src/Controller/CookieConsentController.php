@@ -13,6 +13,7 @@ use huppys\CookieConsentBundle\Ui\ConsentFormDto;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -45,34 +46,6 @@ class CookieConsentController
     {
     }
 
-    /**
-     * Show cookie consent.
-     */
-    #[Route('/cookie-consent/view', name: 'cookie_consent.view')]
-    public function view(): Response
-    {
-        $this->setLocale($this->getCurrentRequest());
-
-        $consentFormDto = new ConsentFormDto(
-            $this->createSimpleConsentForm()->createView(),
-            $this->createDetailedConsentForm()->createView(),
-            $this->position,
-            $this->readMoreRoute
-        );
-
-        try {
-            $response = new Response($this->twigEnvironment->render('@CookieConsent/cookie_consent.html.twig', $consentFormDto->toArray()));
-
-            // Cache in ESI should not be shared
-            $response->setPrivate();
-            $response->setMaxAge(0);
-
-            return $response;
-        } catch (LoaderError|RuntimeError|SyntaxError $e) {
-            return new Response($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
-
     #[Route('/cookie-consent/update', name: 'cookie-consent.update')]
     public function update(): Response
     {
@@ -88,6 +61,7 @@ class CookieConsentController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            /** @var SubmitButton $rejectAllButton */
             if ($rejectAllButton = $form->get(FormSubmitName::REJECT_ALL)) {
                 $rejectAll = $rejectAllButton->isClicked();
 
@@ -104,6 +78,7 @@ class CookieConsentController
                 }
             }
 
+            /** @var SubmitButton $acceptAllButton */
             if ($acceptAllButton = $form->get(FormSubmitName::ACCEPT_ALL)) {
                 $acceptAll = $acceptAllButton->isClicked();
 
@@ -119,9 +94,25 @@ class CookieConsentController
                 }
             }
 
-            $this->cookieConsentService->saveConsentSettings($form->getData(), $request);
+            /** @var SubmitButton $saveConsentSettingsButton */
+            if ($saveConsentSettingsButton = $form->get(FormSubmitName::SAVE_CONSENT_SETTINGS)) {
+                $saveSettings = $saveConsentSettingsButton->isClicked();
 
-            return new JsonResponse('ok', Response::HTTP_CREATED);
+                if($saveSettings) {
+                    try {
+
+                        $responseHeaders = $this->cookieConsentService->saveConsentSettings($form->getData(), $request);
+
+                        return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
+                    } catch (Exception $exception) {
+                        // TODO: handle exception
+                    }
+                }
+
+            }
+
+
+            return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
 
 
         } else if ($form->isSubmitted() && $form->getClickedButton() == null) {
@@ -131,6 +122,25 @@ class CookieConsentController
 
         $this->logger->error('Error while updating cookies via consent manager');
         return new JsonResponse('error', status: Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @return Request|null
+     */
+    public function getCurrentRequest(): ?Request
+    {
+        return $this->requestStack->getCurrentRequest();
+    }
+
+    private function getForm(Request $request): ?FormInterface
+    {
+        if ($request->get("consent_simple") != null) {
+            return $this->createSimpleConsentForm();
+        } else if ($request->get("consent_detailed") != null) {
+            return $this->createDetailedConsentForm();
+        }
+
+        return null;
     }
 
     /**
@@ -163,14 +173,42 @@ class CookieConsentController
     /**
      * Show cookie consent.
      */
-    #[Route('/cookie-consent/view-if-not-set', name: 'cookie_consent.show_if_cookie_consent_not_set')]
-    public function showIfCookieConsentNotSet(): Response
+    #[Route('/cookie-consent/view-if-no-consent', name: 'cookie_consent.view_if_no_consent')]
+    public function viewIfNoConsent(): Response
     {
-        if ($this->cookieConsentService->isCookieConsentOptionSetByUser($this->getCurrentRequest()) === false) {
+        if ($this->cookieConsentService->isCookieConsentFormSubmittedByUser($this->getCurrentRequest()) === false) {
             return $this->view();
         }
 
         return new Response();
+    }
+
+    /**
+     * Show cookie consent.
+     */
+    #[Route('/cookie-consent/view', name: 'cookie_consent.view')]
+    public function view(): Response
+    {
+        $this->setLocale($this->getCurrentRequest());
+
+        $consentFormDto = new ConsentFormDto(
+            $this->createSimpleConsentForm()->createView(),
+            $this->createDetailedConsentForm()->createView(),
+            $this->position,
+            $this->readMoreRoute
+        );
+
+        try {
+            $response = new Response($this->twigEnvironment->render('@CookieConsent/cookie_consent.html.twig', $consentFormDto->toArray()));
+
+            // Cache in ESI should not be shared
+            $response->setPrivate();
+            $response->setMaxAge(0);
+
+            return $response;
+        } catch (LoaderError|RuntimeError|SyntaxError $e) {
+            return new Response($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -183,24 +221,5 @@ class CookieConsentController
             $this->translator->setLocale($locale);
             $request->setLocale($locale);
         }
-    }
-
-    private function getForm(Request $request): ?FormInterface
-    {
-        if ($request->get("consent_simple") != null) {
-            return $this->createSimpleConsentForm();
-        } else if ($request->get("consent_detailed") != null) {
-            return $this->createDetailedConsentForm();
-        }
-
-        return null;
-    }
-
-    /**
-     * @return Request|null
-     */
-    public function getCurrentRequest(): ?Request
-    {
-        return $this->requestStack->getCurrentRequest();
     }
 }

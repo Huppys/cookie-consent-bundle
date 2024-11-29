@@ -20,7 +20,7 @@
     "symfony/translation": "^7.0",
     "symfony/twig-bridge": "^7.0",
     "symfony/twig-bundle": "^7.0",
-    "twig/twig": "3.14.0.0"
+    "twig/twig": "3.14.1.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^v3.38.2",

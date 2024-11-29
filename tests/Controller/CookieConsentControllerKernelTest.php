@@ -2,6 +2,7 @@
 
 namespace huppys\CookieConsentBundle\tests\Controller;
 
+use huppys\CookieConsentBundle\Enum\ConsentType;
 use huppys\CookieConsentBundle\Enum\CookieName;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -41,7 +42,7 @@ class CookieConsentControllerKernelTest extends WebTestCase
         static::getClient()->submit($form, ['consent_simple[reject_all]' => true]);
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseCookieValueSame(CookieName::COOKIE_CONSENT_NAME, 'false');
+        $this->assertResponseCookieValueSame(CookieName::COOKIE_CONSENT_NAME, ConsentType::NO_CONSENT);
     }
 
     #[Test]
