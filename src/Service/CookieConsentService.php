@@ -22,33 +22,63 @@ class CookieConsentService
 
     /**
      * Check if given cookie category is permitted by user.
-     * @param string $category
+     * @param string $categoryName
      * @return bool
      */
-    public function isCategoryAllowedByUser(string $category, Request $request): bool
-    {
-        $consentSettingsFromSession = $request->getSession()->get('consent-settings');
-
-        return $request->cookies->get($category) === 'true';
-    }
-
-    /**
-     * Check if user gave consent for vendor in category
-     * @param string $vendor
-     * @param string $category
-     * @param Request $request
-     * @return bool
-     */
-    public function isVendorAllowedByUser(string $vendor, string $category, Request $request): bool
+    public function isCategoryAllowedByUser(string $categoryName, Request $request): bool
     {
         /** @var ConsentDetailedTypeModel $consentSettingsFromSession */
         $consentSettingsFromSession = $request->getSession()->get('consent-settings');
 
+        if ($consentSettingsFromSession === null) {
+            return false;
+        }
+
         /** @var ConsentCategoryTypeModel $categorySettings */
-        $categorySettings = $consentSettingsFromSession->getCategories()->get($category);
+        $categorySettings = $consentSettingsFromSession->getCategories()->findFirst(function (int $key, ConsentCategoryTypeModel $value) use ($categoryName) {
+            return $value->getName() === $categoryName;
+        });
+
+        if ($categorySettings === null) {
+            return false;
+        }
+
+        $allVendorConsentGiven = $categorySettings->getVendors()->forAll(function (int $key, ConsentVendorTypeModel $value) {
+            return $value->getConsentGiven() === true;
+        });
+
+        return $allVendorConsentGiven;
+    }
+
+    /**
+     * Check if user gave consent for vendor in category
+     * @param string $vendorName
+     * @param string $categoryName
+     * @param Request $request
+     * @return bool
+     */
+    public function isVendorAllowedByUser(string $vendorName, string $categoryName, Request $request): bool
+    {
+        /** @var ConsentDetailedTypeModel $consentSettingsFromSession */
+        $consentSettingsFromSession = $request->getSession()->get('consent-settings');
+        
+        if ($consentSettingsFromSession === null) {
+            return false;
+        }
+
+        /** @var ConsentCategoryTypeModel $categorySettings */
+        $categorySettings = $consentSettingsFromSession->getCategories()->findFirst(function (int $key, ConsentCategoryTypeModel $value) use ($categoryName) {
+            return $value->getName() === $categoryName;
+        });
+
+        if ($categorySettings === null) {
+            return false;
+        }
 
         /** @var ConsentVendorTypeModel $vendorSettings */
-        $vendorSettings = $categorySettings->getVendors()->get($vendor);
+        $vendorSettings = $categorySettings->getVendors()->findFirst(function (int $key, ConsentVendorTypeModel $value) use ($vendorName) {
+            return $value->getName() === $vendorName;
+        });
 
         return $vendorSettings->getConsentGiven();
     }
@@ -147,7 +177,7 @@ class CookieConsentService
         }
 
         // save "no-consent" to session
-        $this->saveConsentSettingsToSession($request,  $this->createDetailedForm(consentGiven: false));
+        $this->saveConsentSettingsToSession($request, $this->createDetailedForm(consentGiven: false));
 
         // save "no-consent" to db
         $this->persistConsentSettings(false);

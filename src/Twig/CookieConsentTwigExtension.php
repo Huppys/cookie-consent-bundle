@@ -27,12 +27,17 @@ class CookieConsentTwigExtension extends AbstractExtension
             new TwigFunction(
                 'cookieconsent_isCookieConsentOptionSetByUser',
                 [$this, 'isCookieConsentOptionSetByUser'],
-                ['needs_context' => true]
+                ['needs_context' => false]
             ),
             new TwigFunction(
                 'cookieconsent_isCategoryAllowedByUser',
                 [$this, 'isCategoryAllowedByUser'],
-                ['needs_context' => true]
+                ['needs_context' => false]
+            ),
+            new TwigFunction(
+                'cookieconsent_isVendorAllowedByUser',
+                [$this, 'isVendorAllowedByUser'],
+                ['needs_context' => false]
             ),
         ];
     }
@@ -40,7 +45,7 @@ class CookieConsentTwigExtension extends AbstractExtension
     /**
      * Checks if user has sent cookie consent form.
      */
-    public function isCookieConsentOptionSetByUser(array $context): bool
+    public function isCookieConsentOptionSetByUser(): bool
     {
         return $this->cookieConsentService->isCookieConsentFormSubmittedByUser($this->requestStack->getCurrentRequest());
     }
@@ -48,8 +53,16 @@ class CookieConsentTwigExtension extends AbstractExtension
     /**
      * Checks if user has given permission for cookie category.
      */
-    public function isCategoryAllowedByUser(string $category, array $context): bool
+    public function isCategoryAllowedByUser(string $category): bool
     {
         return $this->cookieConsentService->isCategoryAllowedByUser($category, $this->requestStack->getCurrentRequest());
+    }
+
+    /**
+     * Checks if user has given permission for cookie category.
+     */
+    public function isVendorAllowedByUser(string $vendor, string $category): bool
+    {
+        return $this->cookieConsentService->isVendorAllowedByUser($vendor, $category, $this->requestStack->getCurrentRequest());
     }
 }
