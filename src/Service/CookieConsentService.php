@@ -27,17 +27,7 @@ class CookieConsentService
      */
     public function isCategoryAllowedByUser(string $categoryName, Request $request): bool
     {
-        /** @var ConsentDetailedTypeModel $consentSettingsFromSession */
-        $consentSettingsFromSession = $request->getSession()->get('consent-settings');
-
-        if ($consentSettingsFromSession === null) {
-            return false;
-        }
-
-        /** @var ConsentCategoryTypeModel $categorySettings */
-        $categorySettings = $consentSettingsFromSession->getCategories()->findFirst(function (int $key, ConsentCategoryTypeModel $value) use ($categoryName) {
-            return $value->getName() === $categoryName;
-        });
+        $categorySettings = $this->getCategorySettingsFromSession($request, $categoryName);
 
         if ($categorySettings === null) {
             return false;
@@ -50,6 +40,30 @@ class CookieConsentService
         return $allVendorConsentGiven;
     }
 
+    private function getCategorySettingsFromSession(Request $request, string $categoryName): ?ConsentCategoryTypeModel
+    {
+        /** @var ConsentDetailedTypeModel $consentSettings */
+        $consentSettings = $this->getConsentSettingsFromSession($request);
+
+        if ($consentSettings === null) {
+            return null;
+        }
+
+        /** @var ConsentCategoryTypeModel $categorySettings */
+        return $consentSettings->getCategories()->findFirst(function (int $key, ConsentCategoryTypeModel $value) use ($categoryName) {
+            return $value->getName() === $categoryName;
+        });
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getConsentSettingsFromSession(Request $request): mixed
+    {
+        return $request->getSession()->get('consent-settings');
+    }
+
     /**
      * Check if user gave consent for vendor in category
      * @param string $vendorName
@@ -59,17 +73,7 @@ class CookieConsentService
      */
     public function isVendorAllowedByUser(string $vendorName, string $categoryName, Request $request): bool
     {
-        /** @var ConsentDetailedTypeModel $consentSettingsFromSession */
-        $consentSettingsFromSession = $request->getSession()->get('consent-settings');
-        
-        if ($consentSettingsFromSession === null) {
-            return false;
-        }
-
-        /** @var ConsentCategoryTypeModel $categorySettings */
-        $categorySettings = $consentSettingsFromSession->getCategories()->findFirst(function (int $key, ConsentCategoryTypeModel $value) use ($categoryName) {
-            return $value->getName() === $categoryName;
-        });
+        $categorySettings = $this->getCategorySettingsFromSession($request, $categoryName);
 
         if ($categorySettings === null) {
             return false;
@@ -89,9 +93,9 @@ class CookieConsentService
      */
     public function isCookieConsentFormSubmittedByUser(Request $request): bool
     {
-        $consentSettingsFromSession = $request->getSession()->get('consent-settings');
+        $consentSettings = $this->getConsentSettingsFromSession($request);
 
-        return $request->cookies->has(CookieName::COOKIE_CONSENT_NAME) && $consentSettingsFromSession != null;
+        return $request->cookies->has(CookieName::COOKIE_CONSENT_NAME) && $consentSettings != null;
     }
 
     public function saveConsentSettings(ConsentDetailedTypeModel $formData, Request $request): ResponseHeaderBag
@@ -105,32 +109,6 @@ class CookieConsentService
 
         // save "no-consent" to session
         $this->saveConsentSettingsToSession($request, $formData);
-
-        // save "no-consent" to db
-        $this->persistConsentSettings(false);
-
-        $headerBag = new ResponseHeaderBag();
-        $headerBag->setCookie($consentCookie);
-
-        return $headerBag;
-    }
-
-    /**
-     * @param Request $request
-     * @return ResponseHeaderBag
-     * @throws InvalidArgumentException
-     */
-    public function acceptAllCookies(Request $request): ResponseHeaderBag
-    {
-        // always set value to true as the user did give the consent to use all cookies
-        $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::FULL_CONSENT);
-
-        if ($consentCookie == null) {
-            throw new InvalidArgumentException("Cookie configuration can't be mapped to a Cookie");
-        }
-
-        // save "no-consent" to session
-        $this->saveConsentSettingsToSession($request, $this->createDetailedForm(consentGiven: true));
 
         // save "no-consent" to db
         $this->persistConsentSettings(false);
@@ -167,17 +145,17 @@ class CookieConsentService
      * @return ResponseHeaderBag
      * @throws InvalidArgumentException
      */
-    public function rejectAllCookies(Request $request): ResponseHeaderBag
+    public function acceptAllCookies(Request $request): ResponseHeaderBag
     {
-        // always set value to false as the user didn't give the consent to use more cookies than necessary but we use the 'consent' cookie to hide the UI
-        $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::NO_CONSENT);
+        // always set value to true as the user did give the consent to use all cookies
+        $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::FULL_CONSENT);
 
         if ($consentCookie == null) {
             throw new InvalidArgumentException("Cookie configuration can't be mapped to a Cookie");
         }
 
         // save "no-consent" to session
-        $this->saveConsentSettingsToSession($request, $this->createDetailedForm(consentGiven: false));
+        $this->saveConsentSettingsToSession($request, $this->createDetailedForm(consentGiven: true));
 
         // save "no-consent" to db
         $this->persistConsentSettings(false);
@@ -214,5 +192,31 @@ class CookieConsentService
         }
 
         return $formModel;
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseHeaderBag
+     * @throws InvalidArgumentException
+     */
+    public function rejectAllCookies(Request $request): ResponseHeaderBag
+    {
+        // always set value to false as the user didn't give the consent to use more cookies than necessary but we use the 'consent' cookie to hide the UI
+        $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::NO_CONSENT);
+
+        if ($consentCookie == null) {
+            throw new InvalidArgumentException("Cookie configuration can't be mapped to a Cookie");
+        }
+
+        // save "no-consent" to session
+        $this->saveConsentSettingsToSession($request, $this->createDetailedForm(consentGiven: false));
+
+        // save "no-consent" to db
+        $this->persistConsentSettings(false);
+
+        $headerBag = new ResponseHeaderBag();
+        $headerBag->setCookie($consentCookie);
+
+        return $headerBag;
     }
 }
