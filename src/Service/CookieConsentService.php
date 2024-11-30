@@ -2,7 +2,6 @@
 
 namespace huppys\CookieConsentBundle\Service;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use huppys\CookieConsentBundle\Enum\ConsentType;
 use huppys\CookieConsentBundle\Enum\CookieName;
 use huppys\CookieConsentBundle\Form\ConsentCategoryTypeModel;
@@ -42,7 +41,16 @@ class CookieConsentService
      */
     public function isVendorAllowedByUser(string $vendor, string $category, Request $request): bool
     {
+        /** @var ConsentDetailedTypeModel $consentSettingsFromSession */
+        $consentSettingsFromSession = $request->getSession()->get('consent-settings');
 
+        /** @var ConsentCategoryTypeModel $categorySettings */
+        $categorySettings = $consentSettingsFromSession->getCategories()->get($category);
+
+        /** @var ConsentVendorTypeModel $vendorSettings */
+        $vendorSettings = $categorySettings->getVendors()->get($vendor);
+
+        return $vendorSettings->getConsentGiven();
     }
 
     /**
@@ -56,17 +64,8 @@ class CookieConsentService
         return $request->cookies->has(CookieName::COOKIE_CONSENT_NAME) && $consentSettingsFromSession != null;
     }
 
-    public function saveConsentSettings(mixed $formData, Request $request): ResponseHeaderBag
+    public function saveConsentSettings(ConsentDetailedTypeModel $formData, Request $request): ResponseHeaderBag
     {
-        // if full consent was given, return
-        if ($this->formDataEqualsFullConsent($formData)) {
-            return $this->acceptAllCookies($request);
-        }
-
-        if ($this->formDataEqualsNoConsent($formData)) {
-            return $this->rejectAllCookies($request);
-        }
-
         // always set value to true as the user did give the consent to at least some of the cookies
         $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::CUSTOM_CONSENT);
 
@@ -86,30 +85,6 @@ class CookieConsentService
         return $headerBag;
     }
 
-    private function formDataEqualsFullConsent(ConsentDetailedTypeModel $formData): bool
-    {
-        /** @var ArrayCollection $categories */
-        $categories = $formData->getCategories();
-
-        if ($categories->isEmpty()) {
-            return false;
-        }
-
-        $categoryConsentDenied = $categories->findFirst(function (int $key, ConsentCategoryTypeModel $category) {
-
-            /** @var ArrayCollection $vendors */
-            $vendors = $category->getVendors();
-
-            $vendorConsentDenied = $vendors->findFirst(function (int $key, ConsentVendorTypeModel $value): bool {
-                return $value->getConsentGiven() === false;
-            });
-
-            return $vendorConsentDenied != null;
-        });
-
-        return $categoryConsentDenied === null;
-    }
-
     /**
      * @param Request $request
      * @return ResponseHeaderBag
@@ -125,7 +100,7 @@ class CookieConsentService
         }
 
         // save "no-consent" to session
-        $this->saveConsentSettingsToSession($request, ConsentType::FULL_CONSENT);
+        $this->saveConsentSettingsToSession($request, $this->createDetailedForm(consentGiven: true));
 
         // save "no-consent" to db
         $this->persistConsentSettings(false);
@@ -157,30 +132,6 @@ class CookieConsentService
         }
     }
 
-    private function formDataEqualsNoConsent(mixed $formData)
-    {
-        /** @var ArrayCollection $categories */
-        $categories = $formData->getCategories();
-
-        if ($categories->isEmpty()) {
-            return false;
-        }
-
-        $categoryConsentGiven = $categories->findFirst(function (int $key, ConsentCategoryTypeModel $category) {
-
-            /** @var ArrayCollection $vendors */
-            $vendors = $category->getVendors();
-
-            $vendorConsentGiven = $vendors->findFirst(function (int $key, ConsentVendorTypeModel $value): bool {
-                return $value->getConsentGiven() === true;
-            });
-
-            return $vendorConsentGiven != null;
-        });
-
-        return $categoryConsentGiven === null;
-    }
-
     /**
      * @param Request $request
      * @return ResponseHeaderBag
@@ -196,7 +147,7 @@ class CookieConsentService
         }
 
         // save "no-consent" to session
-        $this->saveConsentSettingsToSession($request, ConsentType::NO_CONSENT);
+        $this->saveConsentSettingsToSession($request,  $this->createDetailedForm(consentGiven: false));
 
         // save "no-consent" to db
         $this->persistConsentSettings(false);
@@ -207,7 +158,7 @@ class CookieConsentService
         return $headerBag;
     }
 
-    public function createDetailedForm(): ConsentDetailedTypeModel
+    public function createDetailedForm($consentGiven = false): ConsentDetailedTypeModel
     {
         $consentConfig = $this->consentConfiguration;
 
@@ -218,12 +169,12 @@ class CookieConsentService
             $consentCategory = new ConsentCategoryTypeModel();
             $consentCategory->setName($categoryKey);
 
-            foreach ($category as $vendorKey => $vendor) {
+            foreach ($category as $vendor) {
                 $consentCookie = new ConsentVendorTypeModel();
 
                 // explicitly set fields from formData
                 $consentCookie->setName($vendor);
-                $consentCookie->setConsentGiven(false);
+                $consentCookie->setConsentGiven($consentGiven);
                 $consentCookie->setDescriptionKey($vendor);
 
                 $consentCategory->getVendors()->add($consentCookie);
