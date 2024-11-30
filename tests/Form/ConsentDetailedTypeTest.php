@@ -30,7 +30,6 @@ class ConsentDetailedTypeTest extends TypeTestCase
 
             $consentCategory = new ConsentCategoryTypeModel();
             $consentCategory->setName($category['name']);
-            $consentCategory->setConsentGiven($category['userConsent']);
 
             foreach ($category['vendors'] as $vendor) {
                 $consentCookie = new ConsentVendorTypeModel();
@@ -93,7 +92,6 @@ class ConsentDetailedTypeTest extends TypeTestCase
                     'categories' => [
                         [
                             'name' => 'analytics',
-                            'userConsent' => false,
                             'vendors' => [
                                 [
                                     'name' => 'googleanalytics',
@@ -104,7 +102,6 @@ class ConsentDetailedTypeTest extends TypeTestCase
                         ],
                         [
                             'name' => 'tracking',
-                            'userConsent' => true,
                             'vendors' => [
                                 [
                                     'name' => 'googletagmanager',
@@ -115,7 +112,6 @@ class ConsentDetailedTypeTest extends TypeTestCase
                         ],
                         [
                             'name' => 'social_media',
-                            'userConsent' => false,
                             'vendors' => [
                                 [
                                     'name' => 'meta',

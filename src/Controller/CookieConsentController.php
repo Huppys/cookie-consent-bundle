@@ -85,7 +85,7 @@ class CookieConsentController
                 if ($acceptAll) {
                     try {
                         // tell consent manager service to set cookie values accordingly
-                        $responseHeaders = $this->cookieConsentService->acceptAllCookies($form->getData(), $request);
+                        $responseHeaders = $this->cookieConsentService->acceptAllCookies($request);
 
                         return new JsonResponse('ok', Response::HTTP_CREATED, headers: ['set-cookie' => $responseHeaders->getCookies()]);
                     } catch (Exception $exception) {

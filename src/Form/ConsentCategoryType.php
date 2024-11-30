@@ -26,7 +26,10 @@ class ConsentCategoryType extends AbstractType
 //        $categoryDescription = $this->translate('cookie_consent.' . $category . '.description');
 
         $builder->add('consentGiven', CheckboxType::class, [
+            'required' => false,
+            'mapped' => false // we won't map this field to the ConsentCategoryTypeModel, we only need it for client-side interaction
         ]);
+
         $builder->add('vendors', CollectionType::class, [
             'entry_type' => ConsentVendorType::class,
             'entry_options' => [

@@ -25,7 +25,7 @@ class CookieConsentServiceTest extends TestCase
     }
 
     #[Test]
-    public function shouldReturnCookieWithValueFalseAfterRejectingConsent(): void
+    public function shouldReturnCookieWithNoConsentAfterRejectingConsent(): void
     {
         $request = $this->createMock(Request::class);
         $headerBag = $this->consentService->rejectAllCookies($request);
@@ -36,13 +36,34 @@ class CookieConsentServiceTest extends TestCase
     }
 
     #[Test]
-    public function shouldReturnCookieWithValueTrueAfterGivingConsent(): void
+    public function shouldReturnCookieWithFullConsentAfterGivingConsent(): void
     {
         $request = $this->createMock(Request::class);
-        $headerBag = $this->consentService->acceptAllCookies([], $request);
+        $headerBag = $this->consentService->acceptAllCookies($request);
 
         $this->assertInstanceOf(ResponseHeaderBag::class, $headerBag);
         $this->assertEquals(ConsentType::FULL_CONSENT, $headerBag->getCookies()[0]->getValue());
+        $this->assertEquals(CookieName::COOKIE_CONSENT_NAME, $headerBag->getCookies()[0]->getName());
+    }
+
+    #[Test]
+    public function shouldReturnCookieWithCustomConsentAfterSubmittingCustomConsent(): void
+    {
+        $request = $this->createMock(Request::class);
+        $consentSettings = $this->consentService->createDetailedForm();
+
+        /** @var ConsentCategoryTypeModel $consentCategory */
+        $consentCategory = $consentSettings->getCategories()->get(0);
+
+        /** @var ConsentVendorTypeModel $vendor */
+        $vendor = $consentCategory->getVendors()->get(0);
+
+        $vendor->setConsentGiven(true);
+
+        $headerBag = $this->consentService->saveConsentSettings($consentSettings, $request);
+
+        $this->assertInstanceOf(ResponseHeaderBag::class, $headerBag);
+        $this->assertEquals(ConsentType::CUSTOM_CONSENT, $headerBag->getCookies()[0]->getValue());
         $this->assertEquals(CookieName::COOKIE_CONSENT_NAME, $headerBag->getCookies()[0]->getName());
     }
 

@@ -9,7 +9,6 @@ class ConsentCategoryTypeModel
 {
     private string $name;
     private Collection $vendors;
-    private bool $consentGiven;
 
     public function __construct()
     {
@@ -29,15 +28,5 @@ class ConsentCategoryTypeModel
     public function getVendors(): Collection
     {
         return $this->vendors;
-    }
-
-    public function getConsentGiven(): bool
-    {
-        return $this->consentGiven;
-    }
-
-    public function setConsentGiven(bool $consentGiven): void
-    {
-        $this->consentGiven = $consentGiven;
     }
 }

@@ -26,7 +26,9 @@ class ConsentVendorType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('consentGiven', CheckboxType::class);
+        $builder->add('consentGiven', CheckboxType::class, [
+            'required' => false,
+        ]);
 
         $builder->add('name', HiddenType::class);
     }
@@ -37,9 +39,9 @@ class ConsentVendorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-                                   'data_class' => ConsentVendorTypeModel::class,
-                                   'translation_domain' => 'CookieConsentBundle'
-                               ]);
+            'data_class' => ConsentVendorTypeModel::class,
+            'translation_domain' => 'CookieConsentBundle'
+        ]);
     }
 
     protected function translate(string $key): string

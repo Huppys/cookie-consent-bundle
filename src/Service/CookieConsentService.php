@@ -56,58 +56,15 @@ class CookieConsentService
         return $request->cookies->has(CookieName::COOKIE_CONSENT_NAME) && $consentSettingsFromSession != null;
     }
 
-    /**
-     * @param Request $request
-     * @return ResponseHeaderBag
-     * @throws InvalidArgumentException
-     */
-    public function rejectAllCookies(Request $request): ResponseHeaderBag
-    {
-        // always set value to false as the user didn't give the consent to use more cookies than necessary but we use the 'consent' cookie to hide the UI
-        $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::NO_CONSENT);
-
-        if ($consentCookie == null) {
-            throw new InvalidArgumentException("Cookie configuration can't be mapped to a Cookie");
-        }
-
-        // save "no-consent" to session
-        $this->saveConsentSettingsToSession($request, ConsentType::NO_CONSENT);
-
-        // save "no-consent" to db
-        $this->persistConsentSettings(false);
-
-        $headerBag = new ResponseHeaderBag();
-        $headerBag->setCookie($consentCookie);
-
-        return $headerBag;
-    }
-
-    private
-    function saveConsentSettingsToSession(Request $request, mixed $value): void
-    {
-        $session = $request->getSession();
-
-        // save consent settings in session
-        $session->set('consent-settings', $value);
-    }
-
-    private function persistConsentSettings(mixed $data): void
-    {
-        if ($this->persistConsent) {
-            // TODO: implement method
-//        $this->entityManager->persist($cookieLog);
-
-//        $this->entityManager->flush();
-
-            // persist consent log object
-        }
-    }
-
     public function saveConsentSettings(mixed $formData, Request $request): ResponseHeaderBag
     {
         // if full consent was given, return
         if ($this->formDataEqualsFullConsent($formData)) {
-            return $this->acceptAllCookies($formData, $request);
+            return $this->acceptAllCookies($request);
+        }
+
+        if ($this->formDataEqualsNoConsent($formData)) {
+            return $this->rejectAllCookies($request);
         }
 
         // always set value to true as the user did give the consent to at least some of the cookies
@@ -140,10 +97,6 @@ class CookieConsentService
 
         $categoryConsentDenied = $categories->findFirst(function (int $key, ConsentCategoryTypeModel $category) {
 
-            if ($category->getConsentGiven() === false) {
-                return true;
-            }
-
             /** @var ArrayCollection $vendors */
             $vendors = $category->getVendors();
 
@@ -158,12 +111,11 @@ class CookieConsentService
     }
 
     /**
-     * @param mixed $formData
      * @param Request $request
      * @return ResponseHeaderBag
      * @throws InvalidArgumentException
      */
-    public function acceptAllCookies(mixed $formData, Request $request): ResponseHeaderBag
+    public function acceptAllCookies(Request $request): ResponseHeaderBag
     {
         // always set value to true as the user did give the consent to use all cookies
         $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::FULL_CONSENT);
@@ -184,6 +136,77 @@ class CookieConsentService
         return $headerBag;
     }
 
+    private
+    function saveConsentSettingsToSession(Request $request, mixed $value): void
+    {
+        $session = $request->getSession();
+
+        // save consent settings in session
+        $session->set('consent-settings', $value);
+    }
+
+    private function persistConsentSettings(mixed $data): void
+    {
+        if ($this->persistConsent) {
+            // TODO: implement method
+//        $this->entityManager->persist($cookieLog);
+
+//        $this->entityManager->flush();
+
+            // persist consent log object
+        }
+    }
+
+    private function formDataEqualsNoConsent(mixed $formData)
+    {
+        /** @var ArrayCollection $categories */
+        $categories = $formData->getCategories();
+
+        if ($categories->isEmpty()) {
+            return false;
+        }
+
+        $categoryConsentGiven = $categories->findFirst(function (int $key, ConsentCategoryTypeModel $category) {
+
+            /** @var ArrayCollection $vendors */
+            $vendors = $category->getVendors();
+
+            $vendorConsentGiven = $vendors->findFirst(function (int $key, ConsentVendorTypeModel $value): bool {
+                return $value->getConsentGiven() === true;
+            });
+
+            return $vendorConsentGiven != null;
+        });
+
+        return $categoryConsentGiven === null;
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseHeaderBag
+     * @throws InvalidArgumentException
+     */
+    public function rejectAllCookies(Request $request): ResponseHeaderBag
+    {
+        // always set value to false as the user didn't give the consent to use more cookies than necessary but we use the 'consent' cookie to hide the UI
+        $consentCookie = CookieConfigMapper::mapToCookie($this->consentConfiguration['consent_cookie'], ConsentType::NO_CONSENT);
+
+        if ($consentCookie == null) {
+            throw new InvalidArgumentException("Cookie configuration can't be mapped to a Cookie");
+        }
+
+        // save "no-consent" to session
+        $this->saveConsentSettingsToSession($request, ConsentType::NO_CONSENT);
+
+        // save "no-consent" to db
+        $this->persistConsentSettings(false);
+
+        $headerBag = new ResponseHeaderBag();
+        $headerBag->setCookie($consentCookie);
+
+        return $headerBag;
+    }
+
     public function createDetailedForm(): ConsentDetailedTypeModel
     {
         $consentConfig = $this->consentConfiguration;
@@ -194,7 +217,6 @@ class CookieConsentService
 
             $consentCategory = new ConsentCategoryTypeModel();
             $consentCategory->setName($categoryKey);
-            $consentCategory->setConsentGiven(false);
 
             foreach ($category as $vendorKey => $vendor) {
                 $consentCookie = new ConsentVendorTypeModel();
